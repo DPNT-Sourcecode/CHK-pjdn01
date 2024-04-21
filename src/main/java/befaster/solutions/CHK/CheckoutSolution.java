@@ -14,10 +14,10 @@ import static befaster.solutions.CHK.model.CheckoutUtils.*;
 public class CheckoutSolution {
 
 
-//    public static void main(String[] args) {
-//        Integer check = checkout("SXTYZ");
-//        System.out.println(check);
-//    }
+    public static void main(String[] args) {
+        Integer check = checkout("C");
+        System.out.println(check);
+    }
 
     public static Integer checkout(String skus) {
         try {
@@ -37,3 +37,4 @@ public class CheckoutSolution {
         }
     }
 }
+
