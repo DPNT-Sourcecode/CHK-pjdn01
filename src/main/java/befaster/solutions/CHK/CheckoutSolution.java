@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
+
 public class CheckoutSolution {
     public Integer checkout(String skus) {
         if (skus == null || skus.isEmpty()) {
@@ -27,11 +29,13 @@ public class CheckoutSolution {
     private Double computeTotalCost(Map<String, Integer> itemToCountMap) {
         Double totalCost = 0d;
         for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
-            
+            ItemPrice itemPrice = ItemToPriceMap.get(item.getKey());
+//            Double modulo = Math.floorMod()
         }
     }
 
 }
+
 
 
 
