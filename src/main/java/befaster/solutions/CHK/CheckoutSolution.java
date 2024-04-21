@@ -9,10 +9,6 @@ import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 
 public class CheckoutSolution {
 
-    public static void main(String[] args) {
-        Integer check = checkout("EEBB");
-        System.out.println(check);
-    }
     public static Integer checkout(String skus) {
         if (skus == null || skus.isEmpty()) {
             return 0;
@@ -31,4 +27,5 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
 
