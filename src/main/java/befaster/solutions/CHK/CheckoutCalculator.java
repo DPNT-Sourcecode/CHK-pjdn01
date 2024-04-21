@@ -111,8 +111,8 @@ public class CheckoutCalculator {
             if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
                 offers.forEach(offer -> {
                     int offerQuantityUnit = numberOfItems / offer.getQuantity();
-                    int remainingQuantity = numberOfItems - (offerQuantityUnit * offer.getQuantity());
-                    int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingQuantity * itemPrice.getUnitPrice());
+                    int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
+                    int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingNumberOfItems * itemPrice.getUnitPrice());
                     prices.add(totalCost);
                 });
             } else if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() != itemType) {
@@ -152,5 +152,6 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
 
