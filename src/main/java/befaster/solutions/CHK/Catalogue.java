@@ -20,8 +20,8 @@ public class Catalogue implements Serializable {
                     Integer quantity = offerMap.get("quantity") != null ? (Integer) offerMap.get("quantity") : null;
                     Integer offerUnitPrice = offerMap.get("unitPrice") != null ? (Integer) offerMap.get("unitPrice") : null;
                     Integer frequency = offerMap.get("frequency") != null ? (Integer) offerMap.get("frequency") : null;
-                    ItemType offerItemType = offerMap.get("itemType") != null ? (ItemType) offerMap.get("itemType") : null;
-                    OfferType offerType = offerMap.get("offerType") != null ? (OfferType) offerMap.get("offerType") : null;
+                    ItemType offerItemType = offerMap.get("itemType") != null ? ItemType.forName(((String) offerMap.get("itemType"))) : null;
+                    OfferType offerType = offerMap.get("offerType") != null ? OfferType.forName(((String) offerMap.get("offerType"))) : null;
                     Integer freebieUnit = offerMap.get("freebieUnit") != null ? (Integer) offerMap.get("freebieUnit") : null;
                     newData.put(
                             itemType, new ItemPrice(unitPrice,
@@ -37,5 +37,6 @@ public class Catalogue implements Serializable {
         return newData;
     }
 }
+
 
 
