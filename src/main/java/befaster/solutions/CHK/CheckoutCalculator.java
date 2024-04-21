@@ -192,14 +192,12 @@ public class CheckoutCalculator {
 
 
         for (Map.Entry<ItemType, Group> entry : groupMap.entrySet()) {
-//            Map<ItemType, Integer> itemToUnitPriceMap = new HashMap<>();
             Map<ItemType, Integer> itemToQuantityMap = new HashMap<>();
             List<Integer> fullUnitPriceList = new ArrayList<>();
             Group group = entry.getValue();
             for (Map.Entry<ItemType, GroupMember> members : group.getMembers().entrySet()) {
                 ItemType itemType = members.getKey();
                 GroupMember member = members.getValue();
-//                itemToUnitPriceMap.put(itemType, member.getItemPrice().getUnitPrice());
                 itemToQuantityMap.put(itemType, member.getQuantity());
                 Integer unitPrice = member.getItemPrice().getUnitPrice();
                 int itemQuantity = member.getQuantity();
@@ -214,45 +212,16 @@ public class CheckoutCalculator {
             int quantityUnit = numberOfItems / group.getQuantity();
             int remainingQuantity = numberOfItems - (quantityUnit * group.getQuantity());
 
-            Collections.reverse(fullUnitPriceList);
-            
-//            for (Map.Entry<ItemType, Integer> unitMap : itemToUnitPriceMap.entrySet()) {
-//                group.
-////                for (int i = 0; i < )
-//            }
-            System.out.println(remainingQuantity);
+            if (remainingQuantity > 0) {
+                Collections.reverse(fullUnitPriceList);
+                List<Integer> remainingCost = fullUnitPriceList
+            }
 
-//            group.getValue().getMembers().entrySet();
-//                    .stream()
-//                    .map(entryMap -> {
-//                        ItemType itemType = entryMap.getKey();
-//                        entryMap.getValue()
-//                    })
+
         }
-        AtomicReference<Freebies> freebies = new AtomicReference<>();
-//        ItemType itemType = item.getKey();
-//        ItemPrice itemPrice = catalogue.get(itemType);
-//        int numberOfItems = item.getValue() - numberOfFreebies;
-//        if (itemPrice.getSpecialOffers().isPresent()) {
-//            List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
-//            OfferType offerType = offers.stream().iterator().next().getOfferType();
-//
-//
-//            GroupDiscount groupDiscount = GROUP_DISCOUNT_MAP.get(
-//                    offers.stream().iterator().next().getGroupDiscountName()
-//            );
-//            int discountQuantity = groupDiscount.getGroupQuantity();
-//            int discountPrice = groupDiscount.getUnitPrice();
-//        }
-//// STXS
-//        int totalCost = (numberOfItems * itemPrice.getUnitPrice());
-//        prices.add(totalCost);
-//
-//        Integer minPrice = Collections.min(prices);
-
-//        return new ItemCheckoutPrice(minPrice, freebies.get());
         return 0;
     }
 
 }
+
 
