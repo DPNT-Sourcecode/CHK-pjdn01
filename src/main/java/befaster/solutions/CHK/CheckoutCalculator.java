@@ -57,10 +57,11 @@ public class CheckoutCalculator {
         for (Map.Entry<ItemType, Integer> item : itemToCountMap.entrySet()) {
             itemCheckoutPrice.put(item.getKey(), calculateBestOfferPrice(item));
         }
-        Optional<Optional<Freebies>> hasFreebies = itemCheckoutPrice.values().stream()
+        Optional<Freebies> hasFreebies = itemCheckoutPrice.values().stream()
                 .map(ItemCheckoutPrice::getFreebies)
-                .filter(Objects::nonNull)
-                .findFirst();
+                .filter(Optional::isPresent)
+                .findFirst()
+                .orElse(Optional.empty());
 
         if (hasFreebies.isEmpty()) {
             return getSum(itemCheckoutPrice);
@@ -150,6 +151,7 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
 
 
