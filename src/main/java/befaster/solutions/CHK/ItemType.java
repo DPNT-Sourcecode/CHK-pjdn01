@@ -17,7 +17,3 @@ public enum ItemType {
         return this.type;
     }
 }
-
-
-
-
