@@ -28,7 +28,7 @@ public class CheckoutSolution {
 //        Map<Object, Object> myObj =gson.fromJson()
 
             ObjectMapper mapper = new ObjectMapper();
-            Map<Object, Object> myObj = mapper.readValue(new File("itemCatalogue.json"), Map.class);
+            Map<Object, Object> myObj = mapper.readValue(new File("/itemCatalogue.json"), Map.class);
 
             Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
