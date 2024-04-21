@@ -82,6 +82,3 @@ public class CheckoutSolution {
         return groupMap;
     }
 }
-
-
-

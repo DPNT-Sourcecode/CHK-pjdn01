@@ -34,4 +34,3 @@ public class Group {
         return quantity;
     }
 }
-

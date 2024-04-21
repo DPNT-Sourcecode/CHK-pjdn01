@@ -67,5 +67,3 @@ public enum ItemType implements Serializable {
         return this.type;
     }
 }
-
-

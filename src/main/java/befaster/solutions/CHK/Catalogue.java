@@ -42,6 +42,3 @@ public class Catalogue implements Serializable {
 
     public static final List<ItemType> GROUPS = Arrays.asList(ItemType.GroupA);
 }
-
-
-
