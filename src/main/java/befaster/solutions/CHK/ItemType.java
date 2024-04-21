@@ -1,9 +1,10 @@
 package befaster.solutions.CHK;
 
 public enum ItemType {
-    A,
-    B,
-    C,
-    D
+    A("A"),
+    B("B"),
+    C("C"),
+    D("D")
 }
+
 
