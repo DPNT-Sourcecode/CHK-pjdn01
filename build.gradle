@@ -18,6 +18,7 @@ repositories {
 dependencies {
     implementation 'ro.ghionoiu:tdl-client-java:0.26.5'
     implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.9'
 
     testImplementation('org.junit.jupiter:junit-jupiter:5.9.1')
     testImplementation('org.junit.platform:junit-platform-suite:1.8.1')
@@ -60,3 +61,4 @@ jacocoTestReport {
         html.required = false
     }
 }
+

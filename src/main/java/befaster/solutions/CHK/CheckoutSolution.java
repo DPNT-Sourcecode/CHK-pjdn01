@@ -1,7 +1,9 @@
 package befaster.solutions.CHK;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +19,11 @@ public class CheckoutSolution {
         if (skus == null || skus.isEmpty()) {
             return 0;
         }
-        Gson gson = new Gson();
-        Map<Object, Object> myObj =gson.fromJson()
+//        Gson gson = new Gson();
+//        Map<Object, Object> myObj =gson.fromJson()
+
+        ObjectMapper mapper = new ObjectMapper();
+        InputStream is = Test.class.getResourceAsStream("/test.json");
 
         Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
@@ -34,5 +39,6 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
 
 
