@@ -2,15 +2,13 @@ package befaster.solutions.CHK;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import static befaster.solutions.CHK.CheckoutCalculator.calculateTotalCost;
-import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 
 public class CheckoutSolution {
 
     public static void main(String[] args) {
-        Integer check = checkout("FF");
+        Integer check = checkout("FFABCDECBAABCABBAAAEEAAFF");
         System.out.println(check);
     }
     public static Integer checkout(String skus) {
@@ -31,4 +29,5 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
 
