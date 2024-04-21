@@ -150,12 +150,17 @@ public class CheckoutCalculator {
             List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
             long offerItemTypes = offers.stream().map(Offer::getItemType).distinct().count();
             if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
-                offers.forEach((offer, ) -> {
-                    int offerQuantityUnit = numberOfItems / offer.getQuantity();
-                    int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
-                    int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingNumberOfItems * itemPrice.getUnitPrice());
-                    prices.add(totalCost);
-                });
+                for (int i = 0; i < offers.size(); i++) {
+                    Offer offer = offers.get(i);
+                    if (numberOfItems >= offer.getQuantity()) {
+                        int offerQuantityUnit = numberOfItems / offer.getQuantity();
+                        int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
+                        int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingNumberOfItems * itemPrice.getUnitPrice());
+                        prices.add(totalCost);
+                    }
+
+                }
+                ;
             }
         }
     }
@@ -171,4 +176,5 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
