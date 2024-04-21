@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.FileReader;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static befaster.solutions.CHK.Catalogue.*;
 import static befaster.solutions.CHK.CheckoutCalculator.calculateTotalCost;
@@ -31,7 +29,7 @@ public class CheckoutSolution {
             Map<ItemType, ItemPrice> catalogue = buildCatalogue(data);
             Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus, catalogue, false);
             Map<ItemType, Group> groupMap = buildGroup(skus, catalogue);
-            Integer totalCost = calculateTotalCost(itemToCountMap, catalogue);
+            Integer totalCost = calculateTotalCost(itemToCountMap, groupMap, catalogue);
             return totalCost;
         } catch (Exception e) {
             System.out.println("Error occurred loading catalogue data");
@@ -84,5 +82,6 @@ public class CheckoutSolution {
         return groupMap;
     }
 }
+
 
 

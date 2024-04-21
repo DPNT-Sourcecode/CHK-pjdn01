@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import static befaster.solutions.CHK.Catalogue.GROUP_DISCOUNT_MAP;
 
 public class CheckoutCalculator {
-    public static Integer calculateTotalCost(Map<ItemType, Integer> itemToCountMap, Map<ItemType, ItemPrice> catalogue) {
+    public static Integer calculateTotalCost(Map<ItemType, Integer> itemToCountMap, Map<ItemType, Group> groupMap, Map<ItemType, ItemPrice> catalogue) {
 
         Optional<ItemType> hasUnknownItem = itemToCountMap.keySet().stream()
                 .filter(type -> type == ItemType.UNKNOWN)
@@ -177,4 +177,5 @@ public class CheckoutCalculator {
     }
 
 }
+
 
