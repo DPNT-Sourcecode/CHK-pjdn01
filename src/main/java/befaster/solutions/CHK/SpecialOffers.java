@@ -27,11 +27,18 @@ public class SpecialOffers {
             return this;
         }
 
-        public SpecialOffersBuilder withOffer(int quantity, ItemType itemType, int unitPrice, OfferType offerType, int FreebieUnit) {
-            Offer offer = new Offer(quantity, itemType, unitPrice, offerType, FreebieUnit);
+        public SpecialOffersBuilder withOffer(int quantity, ItemType itemType, int unitPrice, OfferType offerType, int freebieUnit) {
+            Offer offer = new Offer(quantity, itemType, unitPrice, offerType, freebieUnit);
             this.offers.add(offer);
             return this;
         }
+
+        public SpecialOffersBuilder withOffer(int quantity, ItemType itemType, int unitPrice, OfferType offerType, int freebieUnit, int frequency) {
+            Offer offer = new Offer(quantity, itemType, unitPrice, offerType, freebieUnit, frequency);
+            this.offers.add(offer);
+            return this;
+        }
+
 
         public SpecialOffers build() {
             return new SpecialOffers(this);
@@ -40,3 +47,4 @@ public class SpecialOffers {
 
 
 }
+
