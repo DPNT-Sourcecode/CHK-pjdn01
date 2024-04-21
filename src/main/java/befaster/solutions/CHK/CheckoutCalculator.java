@@ -217,7 +217,7 @@ public class CheckoutCalculator {
 
             if (remainingQuantity > 0) {
                 Collections.sort(fullUnitPriceList);
-                List<Integer> remainingCost = fullUnitPriceList.subList(0, 2);
+                List<Integer> remainingCost = fullUnitPriceList.subList(0, remainingQuantity);
                 totalNonGroupCost = remainingCost.stream().reduce(Integer::sum).orElseThrow();
             }
             prices.add(totalGroupCost + totalNonGroupCost);
@@ -227,3 +227,4 @@ public class CheckoutCalculator {
     }
 
 }
+

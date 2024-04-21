@@ -15,7 +15,7 @@ public class CheckoutSolution {
 
 
     public static void main(String[] args) {
-        Integer check = checkout("D");
+        Integer check = checkout("S");
         System.out.println(check);
     }
 
@@ -37,5 +37,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
