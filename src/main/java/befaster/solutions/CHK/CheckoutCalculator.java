@@ -104,26 +104,26 @@ public class CheckoutCalculator {
         AtomicReference<Freebies> freebies = new AtomicReference<>();
         ItemType itemType = item.getKey();
         ItemPrice itemPrice = ItemToPriceMap2.get(itemType);
-        int quantity = item.getValue() - numberOfFreebies;
+        int numberOfItems = item.getValue() - numberOfFreebies;
         if (itemPrice.getSpecialOffers().isPresent()) {
             List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
             long offerItemTypes = offers.stream().map(Offer::getItemType).distinct().count();
             if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
                 offers.forEach(offer -> {
-                    int offerQuantityUnit = quantity / offer.getQuantity();
-                    int remainingQuantity = item.getValue() - (offerQuantityUnit * quantity);
+                    int offerQuantityUnit = numberOfItems / offer.getQuantity();
+                    int remainingQuantity = numberOfItems - (offerQuantityUnit * offer.getQuantity());
                     int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingQuantity * itemPrice.getUnitPrice());
                     prices.add(totalCost);
                 });
             } else if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() != itemType) {
                 offers.forEach(offer -> {
                     int offerPrice = offer.getUnitPrice();
-                    int offerQuantityUnit = item.getValue() / quantity;
+                    int offerQuantityUnit = item.getValue() / numberOfItems;
                     if (offerPrice == 0) {
                         int totalCost = (item.getValue() * itemPrice.getUnitPrice());
                         prices.add(totalCost);
                     } else {
-                        int remainingQuantity = item.getValue() - (offerQuantityUnit * quantity);
+                        int remainingQuantity = item.getValue() - (offerQuantityUnit * numberOfItems);
                         int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingQuantity * itemPrice.getUnitPrice());
                         prices.add(totalCost);
                     }
@@ -152,4 +152,5 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
