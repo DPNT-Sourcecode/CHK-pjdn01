@@ -69,7 +69,7 @@ public class CheckoutCalculator {
             Map<ItemType, ItemCheckoutPrice> itemCheckoutPriceWithFreebies = new HashMap<>();
             for (Map.Entry<ItemType, ItemCheckoutPrice> item : itemCheckoutPrice.entrySet()) {
                 Optional<Freebies> optFreebie = item.getValue().getFreebies();
-                if (optFreebie.isPresent()) {
+                if (optFreebie.isPresent() && itemToCountMap.get(optFreebie.get().getItemType()) != null) {
                     Freebies freebie = optFreebie.get();
                     Map.Entry<ItemType, Integer> freebieItem = Map.entry(freebie.getItemType(), itemToCountMap.get(freebie.getItemType()));
                     itemCheckoutPriceWithFreebies.put(freebie.getItemType(), calculateBestOfferPrice(freebieItem, freebie.getNumberOfItem()));
@@ -151,3 +151,4 @@ public class CheckoutCalculator {
 //    }
 
 }
+
