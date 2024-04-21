@@ -141,12 +141,10 @@ public class CheckoutCalculator {
                         int totalCost = (numberOfItems * itemPrice.getUnitPrice());
                         prices.add(totalCost);
                     } else {
-                        if (offer.getFrequency() <= numberOfItems) {
-                            int freeItem = numberOfItems / offer.getFrequency();
-                            int remainingQuantity = numberOfItems - freeItem;
-                            int totalCost = (remainingQuantity * itemPrice.getUnitPrice());
-                            prices.add(totalCost);
-                        }
+                        int remainingQuantity = numberOfItems < offer.getFrequency() ?
+                                numberOfItems : numberOfItems / offer.getFrequency();
+                        int totalCost = (remainingQuantity * itemPrice.getUnitPrice());
+                        prices.add(totalCost);
                     }
 
                     if (offer.getFreebieUnit() > 0 && numberOfItems >= offer.getQuantity()) {
@@ -165,6 +163,7 @@ public class CheckoutCalculator {
     }
 
 }
+
 
 
 
