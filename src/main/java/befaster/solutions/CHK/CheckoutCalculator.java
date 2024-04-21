@@ -149,8 +149,8 @@ public class CheckoutCalculator {
                         prices.add(totalCost);
                     }
 
-                    if (offer.getFreebieUnit() > 0 && offer.getFrequency() == 0 && numberOfItems >= offer.getQuantity()) {
-                        freebies.set(new Freebies(offer.getItemType(), offer.getFreebieUnit() * offerQuantityUnit));
+                    if (offer.getFrequency() == 0 && numberOfItems >= offer.getQuantity()) {
+                        freebies.set(new Freebies(offer.getItemType(), offerQuantityUnit));
                     }
                 });
             }

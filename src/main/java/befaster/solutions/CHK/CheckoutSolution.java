@@ -15,6 +15,7 @@ public class CheckoutSolution {
         if (skus == null || skus.isEmpty()) {
             return 0;
         }
+        ObjectMapper mapper = new ObjectMapper();
         Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
         Integer totalCost = calculateTotalCost(itemToCountMap);

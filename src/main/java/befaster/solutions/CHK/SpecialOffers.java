@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpecialOffers {
-    private final List<Offer> specialOffers;
+    private final List<Offer> offers;
 
     public SpecialOffers(List<Offer> offers) {
-        this.specialOffers = offers;
+        this.offers = offers;
     }
 
     public SpecialOffers(SpecialOffersBuilder specialOffersBuilder) {
-        this.specialOffers = specialOffersBuilder.offers;
+        this.offers = specialOffersBuilder.offers;
     }
 
     public List<Offer> getOffers() {
-        return specialOffers;
+        return offers;
     }
 
     public static class SpecialOffersBuilder {
