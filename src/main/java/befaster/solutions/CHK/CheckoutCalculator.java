@@ -72,7 +72,7 @@ public class CheckoutCalculator {
                 if (optFreebie.isPresent()) {
                     Freebies freebie = optFreebie.get();
                     Map.Entry<ItemType, Integer> freebieItem = Map.entry(freebie.getItemType(), itemToCountMap.get(freebie.getItemType()));
-                    itemCheckoutPriceWithFreebies.put(freebie.getItemType(), calculateBestOfferPrice(freebieItem, freebie.getQuantity()));
+                    itemCheckoutPriceWithFreebies.put(freebie.getItemType(), calculateBestOfferPrice(freebieItem, freebie.getNumberOfItem()));
                 }
             }
             if (!itemCheckoutPriceWithFreebies.isEmpty()) {
@@ -151,6 +151,7 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
 
 
