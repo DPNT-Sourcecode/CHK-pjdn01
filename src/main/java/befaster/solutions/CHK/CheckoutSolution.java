@@ -28,8 +28,8 @@ public class CheckoutSolution {
         String filename = "D:\\akahuc\\Documents\\runner-for-java-windows\\accelerate_runner\\src\\main\\resources\\itemCatalogue.json";
 
         try {
-            //        Gson gson = new Gson();
-//        Map<Object, Object> myObj =gson.fromJson()
+//                    Gson gson = new Gson();
+//            Catalogue catalogue = gson.fromJson(filename, Catalogue.class);
 
             ObjectMapper mapper = new ObjectMapper();
             Map<Object, Object> myObj = mapper.readValue(new FileReader(filename), Map.class);
@@ -53,6 +53,3 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
-
-
-
