@@ -195,6 +195,8 @@ public class CheckoutCalculator {
             Map<ItemType, Integer> itemToQuantityMap = new HashMap<>();
             List<Integer> fullUnitPriceList = new ArrayList<>();
             Group group = entry.getValue();
+            int totalGroupCost = 0;
+            int totalNonGroupCost = 0;
             for (Map.Entry<ItemType, GroupMember> members : group.getMembers().entrySet()) {
                 ItemType itemType = members.getKey();
                 GroupMember member = members.getValue();
@@ -211,17 +213,21 @@ public class CheckoutCalculator {
                     .reduce(Integer::sum).orElseThrow();
             int quantityUnit = numberOfItems / group.getQuantity();
             int remainingQuantity = numberOfItems - (quantityUnit * group.getQuantity());
+            totalGroupCost = quantityUnit * group.getUnitPrice();
 
             if (remainingQuantity > 0) {
                 Collections.reverse(fullUnitPriceList);
-                List<Integer> remainingCost = fullUnitPriceList
+                List<Integer> remainingCost = fullUnitPriceList.subList(0, 2);
+                totalNonGroupCost = remainingCost.stream().reduce(Integer::sum).orElseThrow();
             }
-
-
+            prices.add(totalGroupCost + totalNonGroupCost);
         }
-        return 0;
+
+        Integer minPrice = Collections.min(prices);
+        return minPrice;
     }
 
 }
+
 
 
