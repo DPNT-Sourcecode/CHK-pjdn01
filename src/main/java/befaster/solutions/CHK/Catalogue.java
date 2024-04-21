@@ -40,6 +40,7 @@ public class Catalogue implements Serializable {
             "GroupA", new GroupDiscount(3, 45)
     );
 
-    public static final List<ItemType> GROUPS = Arrays.asList(ItemType.GROUP_1);
+    public static final List<ItemType> GROUPS = Arrays.asList(ItemType.GroupA);
 }
+
 
