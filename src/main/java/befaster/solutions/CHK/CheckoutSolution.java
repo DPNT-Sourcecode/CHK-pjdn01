@@ -7,6 +7,8 @@ import java.util.Optional;
 import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 
 public class CheckoutSolution {
+
+    public static  main
     public Integer checkout(String skus) {
         if (skus == null || skus.isEmpty()) {
             return -1;
@@ -50,6 +52,7 @@ public class CheckoutSolution {
         return totalCost;
     }
 }
+
 
 
 
