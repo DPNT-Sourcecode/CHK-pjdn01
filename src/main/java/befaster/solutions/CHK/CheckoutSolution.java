@@ -14,7 +14,7 @@ public class CheckoutSolution {
     private static final String filename = "D:\\akahuc\\Documents\\runner-for-java-windows\\accelerate_runner\\src\\main\\java\\befaster\\solutions\\CHK\\itemCatalogue.json";
 
     public static void main(String[] args) {
-        Integer check = checkout("AAAAAPPPPPUUUUEEBRRRQAAAHHHHHHHHHHVVVBBNNNMFFFKKQQQVVHHHHH");
+        Integer check = checkout("SS");
         System.out.println(check);
     }
 
@@ -44,3 +44,4 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+

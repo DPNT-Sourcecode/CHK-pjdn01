@@ -167,7 +167,7 @@
     }
   },
   "S": {
-    "unitPrice": 30
+    "unitPrice": 20
   },
   "T": {
     "unitPrice": 20
@@ -209,12 +209,13 @@
     "unitPrice": 20
   },
   "X": {
-    "unitPrice": 90
+    "unitPrice": 17
   },
   "Y": {
-    "unitPrice": 10
+    "unitPrice": 20
   },
   "Z": {
-    "unitPrice": 50
+    "unitPrice": 21
   }
 }
+
