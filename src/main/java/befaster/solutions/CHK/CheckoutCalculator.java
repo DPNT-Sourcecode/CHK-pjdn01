@@ -110,9 +110,14 @@ public class CheckoutCalculator {
             long offerItemTypes = offers.stream().map(Offer::getItemType).distinct().count();
 
             if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
-                int totalOfferQuantity = offers.stream().map(Offer::getQuantity).reduce(Integer::sum).orElse(0);
-
-                if (totalOfferQuantity > 0 && totalOfferQuantity <= numberOfItems) {
+                List<Integer> offerQuantities = offers.stream().map(Offer::getQuantity).toList();
+                int maxOfferQuantity = Collections.max(offerQuantities);
+                int totalOfferQuantity = offerQuantities.stream().reduce(Integer::sum).orElseThrow();
+                if (maxOfferQuantity > 0 && maxOfferQuantity % numberOfItems == 0) {
+                    int offerQuantityUnit = numberOfItems / totalOfferQuantity;
+                    Offer offer = offers.stream().filter(o -> o.getQuantity() == maxOfferQuantity).findFirst().orElseThrow();
+                    prices.add(offerQuantityUnit * offer.getUnitPrice());
+                } else if (maxOfferQuantity > 0 && totalOfferQuantity <= numberOfItems) {
                     int offerQuantityUnit = numberOfItems / totalOfferQuantity;
                     AtomicInteger totalCost = new AtomicInteger();
                     offers.forEach(offer -> totalCost.addAndGet(offerQuantityUnit * offer.getUnitPrice()));
@@ -153,6 +158,5 @@ public class CheckoutCalculator {
         return new ItemCheckoutPrice(minPrice, freebies.get());
     }
 
-
-
 }
+
