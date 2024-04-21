@@ -7,6 +7,11 @@ import java.util.Optional;
 import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 
 public class CheckoutSolution {
+
+    public static void main(String[] args) {
+        Integer check = checkout("AAAB");
+        System.out.println(check);
+    }
     public static Integer checkout(String skus) {
         if (skus == null || skus.isEmpty()) {
             return 0;
@@ -41,7 +46,7 @@ public class CheckoutSolution {
             final Optional<Integer> specialOfferQuantity = itemPrice.getSpecialOfferQuantity();
             if (specialOfferPrice.isPresent() && specialOfferQuantity.isPresent()) {
                 int specialQuantityUnit = item.getValue() / specialOfferQuantity.get();
-                int remainingQuantity = item.getValue() - specialQuantityUnit;
+                int remainingQuantity = item.getValue() - (specialQuantityUnit * specialOfferQuantity.get());
                 totalCost += (specialQuantityUnit * specialOfferPrice.get()) + (remainingQuantity * unitPrice);
             } else {
                 totalCost += (item.getValue() * unitPrice);
@@ -50,3 +55,4 @@ public class CheckoutSolution {
         return totalCost;
     }
 }
+
