@@ -1,5 +1,6 @@
 package befaster.solutions.CHK;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpecialOffers {
@@ -9,15 +10,29 @@ public class SpecialOffers {
         this.offers = offers;
     }
 
+    public SpecialOffers(SpecialOffersBuilder specialOffersBuilder) {
+        this.offers = specialOffersBuilder.offers;
+    }
+
     public List<Offer> getOffers() {
         return offers;
     }
 
-    public SpecialOffers withOffer(int quantity, ItemType itemType, int unitPrice, OfferType offerType) {
-        Offer offer = new Offer(quantity, itemType, unitPrice, offerType);
-        offers.add(offer);
-        return this;
+    public static class SpecialOffersBuilder {
+        protected final List<Offer> offers = new ArrayList<>();
+
+        public SpecialOffersBuilder withOffer(int quantity, ItemType itemType, int unitPrice, OfferType offerType) {
+            Offer offer = new Offer(quantity, itemType, unitPrice, offerType);
+            this.offers.add(offer);
+            return this;
+        }
+
+        public SpecialOffers build() {
+            return new SpecialOffers(this);
+        }
     }
 
+
 }
+
 

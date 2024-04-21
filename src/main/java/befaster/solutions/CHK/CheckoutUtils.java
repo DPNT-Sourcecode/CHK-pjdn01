@@ -11,4 +11,26 @@ public class CheckoutUtils {
                     ItemType.C, new ItemPrice(20),
                     ItemType.D, new ItemPrice(15)
             );
+    public static final Map<ItemType, ItemPrice> ItemToPriceMap2 =
+            Map.of(
+                    ItemType.A, new ItemPrice(50,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(3, ItemType.A, 130, OfferType.MULTIPLE)
+                                    .withOffer(5, ItemType.A, 200, OfferType.MULTIPLE)
+                                    .build()
+                    ),
+                    ItemType.B, new ItemPrice(30,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(2, ItemType.B, 45, OfferType.MULTIPLE)
+                                    .build()
+                            ),
+                    ItemType.C, new ItemPrice(20),
+                    ItemType.D, new ItemPrice(15),
+                    ItemType.E, new ItemPrice(40,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(2, ItemType.B, 0, OfferType.MULTIPLE)
+                                    .build()
+                            )
+            );
 }
+
