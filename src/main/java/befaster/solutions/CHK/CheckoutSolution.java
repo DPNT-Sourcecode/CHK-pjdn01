@@ -1,8 +1,5 @@
 package befaster.solutions.CHK;
 
-import befaster.runner.SolutionNotImplementedException;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +13,7 @@ public class CheckoutSolution {
         }
         Map<String, Integer> itemToCountMap = getItemToCountMap(skus);
 
-        return null;
+        return computeTotalCost(itemToCountMap);
     }
 
     private Map<String, Integer> getItemToCountMap(String skus) {
@@ -27,23 +24,32 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 
-    private Double computeTotalCost(Map<String, Integer> itemToCountMap) {
-        Double totalCost = 0d;
+    private Integer computeTotalCost(Map<String, Integer> itemToCountMap) {
+        int totalCost = 0;
         for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
             ItemPrice itemPrice = ItemToPriceMap.get(ItemType.forName(item.getKey()));
             if (itemPrice == null) {
-                return -1d;
+                return -1;
             }
-            final Double unitPrice = itemPrice.getUnitPrice();
-            final Optional<Double> specialOfferPrice = itemPrice.getSpecialOfferPrice();
+            final Integer unitPrice = itemPrice.getUnitPrice();
+
+            if (unitPrice == null) {
+                return -1;
+            }
+
+            final Optional<Integer> specialOfferPrice = itemPrice.getSpecialOfferPrice();
             final Optional<Integer> specialOfferQuantity = itemPrice.getSpecialOfferQuantity();
-            if (specialOfferPrice.isPresent()) {
-                Integer specialQuantityUnit = Math.floorMod(item.getValue(), specialOfferQuantity.get());
+            if (specialOfferPrice.isPresent() && specialOfferQuantity.isPresent()) {
+                int specialQuantityUnit = Math.floorMod(item.getValue(), specialOfferQuantity.get());
+                int remainingQuantity = item.getValue() - specialQuantityUnit;
+                totalCost += (specialQuantityUnit * specialOfferPrice.get()) + (remainingQuantity * unitPrice);
+            } else {
+                totalCost += (item.getValue() * unitPrice);
             }
         }
+        return totalCost;
     }
-    
-
 }
+
 
 
