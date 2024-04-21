@@ -1,6 +1,7 @@
 package befaster.solutions.CHK;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
@@ -107,15 +108,26 @@ public class CheckoutCalculator {
         if (itemPrice.getSpecialOffers().isPresent()) {
             List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
             long offerItemTypes = offers.stream().map(Offer::getItemType).distinct().count();
+
             if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
                 int totalOfferQuantity = offers.stream().map(Offer::getQuantity).reduce(Integer::sum).orElse(0);
-                if( totalOfferQuantity > 0 && totalOfferQuantity < )
-                offers.forEach(offer -> {
-                    int offerQuantityUnit = numberOfItems / offer.getQuantity();
-                    int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
-                    int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingNumberOfItems * itemPrice.getUnitPrice());
-                    prices.add(totalCost);
-                });
+
+                if (totalOfferQuantity > 0 && totalOfferQuantity <= numberOfItems) {
+                    int offerQuantityUnit = numberOfItems / totalOfferQuantity;
+                    AtomicInteger totalCost = new AtomicInteger();
+                    offers.forEach(offer -> totalCost.addAndGet(offerQuantityUnit * offer.getUnitPrice()));
+                    int remainingNumberOfItems = numberOfItems - (totalOfferQuantity * offerQuantityUnit);
+                    totalCost.addAndGet(remainingNumberOfItems * itemPrice.getUnitPrice());
+                    prices.add(totalCost.get());
+                } else {
+                    offers.forEach(offer -> {
+                        int offerQuantityUnit = numberOfItems / offer.getQuantity();
+                        int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
+                        int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingNumberOfItems * itemPrice.getUnitPrice());
+                        prices.add(totalCost);
+                    });
+                }
+
             } else if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() != itemType) {
                 offers.forEach(offer -> {
                     int offerQuantityUnit = numberOfItems / offer.getQuantity();
@@ -177,5 +189,6 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
 
