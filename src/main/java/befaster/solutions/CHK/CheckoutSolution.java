@@ -24,15 +24,15 @@ public class CheckoutSolution {
             return 0;
         }
 
-        String filename = ""
+        String filename = "D:\\akahuc\\Documents\\runner-for-java-windows\\accelerate_runner\\src\\main\\resources\\itemCatalogue.json";
 
         try {
             //        Gson gson = new Gson();
 //        Map<Object, Object> myObj =gson.fromJson()
 
             ObjectMapper mapper = new ObjectMapper();
-            Map<Object, Object> myObj = mapper.readValue(new FileReader("itemCatalogue.json"), Map.class);
-
+            Map<ItemType, ItemPrice> myObj = mapper.readValue(new FileReader(filename), Map.class);
+            ItemPrice itemPrice = myObj.get(ItemType.A);
             Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
             Integer totalCost = calculateTotalCost(itemToCountMap);
@@ -52,8 +52,3 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
-
-
-
-
-
