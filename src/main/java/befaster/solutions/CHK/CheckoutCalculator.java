@@ -156,8 +156,3 @@ public class CheckoutCalculator {
 
 
 }
-
-
-
-
-
