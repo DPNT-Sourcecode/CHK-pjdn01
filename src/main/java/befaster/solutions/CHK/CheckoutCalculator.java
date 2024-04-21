@@ -4,10 +4,10 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
+//import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 
 public class CheckoutCalculator {
-    public static Integer calculateTotalCost(Map<ItemType, Integer> itemToCountMap) {
+    public static Integer calculateTotalCost(Map<ItemType, Integer> itemToCountMap, Map<ItemType, ItemPrice> catalogue) {
 
         Optional<ItemType> hasUnknownItem = itemToCountMap.keySet().stream()
                 .filter(type -> type == ItemType.UNKNOWN)
@@ -21,7 +21,7 @@ public class CheckoutCalculator {
 
         Optional<Optional<SpecialOffers>> hasSpecialOffers = itemToCountMap.keySet().stream()
                 .filter(type -> type != ItemType.UNKNOWN)
-                .map(ItemToPriceMap::get)
+                .map(catalogue::get)
                 .map(ItemPrice::getSpecialOffers)
                 .filter(Objects::nonNull)
                 .map(Optional::of)
@@ -29,15 +29,15 @@ public class CheckoutCalculator {
                 .orElse(Optional.empty());
 
         if (hasSpecialOffers.isEmpty()) {
-            return simpleCheckoutCal(itemToCountMap);
+            return simpleCheckoutCal(itemToCountMap, catalogue);
         }
-        return complexCheckoutCal(itemToCountMap);
+        return complexCheckoutCal(itemToCountMap, catalogue);
     }
 
-    private static int simpleCheckoutCal(Map<ItemType, Integer> itemToCountMap) {
+    private static int simpleCheckoutCal(Map<ItemType, Integer> itemToCountMap, Map<ItemType, ItemPrice> catalogue) {
         int totalCost = 0;
         for (Map.Entry<ItemType, Integer> item : itemToCountMap.entrySet()) {
-            ItemPrice itemPrice = ItemToPriceMap.get(item.getKey());
+            ItemPrice itemPrice = catalogue.get(item.getKey());
             if (itemPrice == null) {
                 return -1;
             }
@@ -51,11 +51,11 @@ public class CheckoutCalculator {
         return totalCost;
     }
 
-    private static int complexCheckoutCal(Map<ItemType, Integer> itemToCountMap) {
+    private static int complexCheckoutCal(Map<ItemType, Integer> itemToCountMap, Map<ItemType, ItemPrice> catalogue) {
         // EEBB
         Map<ItemType, ItemCheckoutPrice> itemCheckoutPrice = new HashMap<>();
         for (Map.Entry<ItemType, Integer> item : itemToCountMap.entrySet()) {
-            itemCheckoutPrice.put(item.getKey(), calculateBestOfferPrice(item));
+            itemCheckoutPrice.put(item.getKey(), calculateBestOfferPrice(catalogue, item));
         }
         Optional<Freebies> hasFreebies = itemCheckoutPrice.values().stream()
                 .map(ItemCheckoutPrice::getFreebies)
@@ -72,7 +72,7 @@ public class CheckoutCalculator {
                 if (optFreebie.isPresent() && itemToCountMap.get(optFreebie.get().getItemType()) != null) {
                     Freebies freebie = optFreebie.get();
                     Map.Entry<ItemType, Integer> freebieItem = Map.entry(freebie.getItemType(), itemToCountMap.get(freebie.getItemType()));
-                    itemCheckoutPriceWithFreebies.put(freebie.getItemType(), calculateBestOfferPrice(freebieItem, freebie.getNumberOfItem()));
+                    itemCheckoutPriceWithFreebies.put(freebie.getItemType(), calculateBestOfferPrice(catalogue, freebieItem, freebie.getNumberOfItem()));
                 }
             }
             if (!itemCheckoutPriceWithFreebies.isEmpty()) {
@@ -94,15 +94,17 @@ public class CheckoutCalculator {
                 .reduce(Integer::sum).orElse(-1);
     }
 
-    private static ItemCheckoutPrice calculateBestOfferPrice(Map.Entry<ItemType, Integer> item) {
-        return calculateBestOfferPrice(item, 0);
+    private static ItemCheckoutPrice calculateBestOfferPrice(
+            Map<ItemType, ItemPrice> catalogue, Map.Entry<ItemType, Integer> item) {
+        return calculateBestOfferPrice(catalogue, item, 0);
     }
 
-    private static ItemCheckoutPrice calculateBestOfferPrice(Map.Entry<ItemType, Integer> item, int numberOfFreebies) {
+    private static ItemCheckoutPrice calculateBestOfferPrice(
+            Map<ItemType, ItemPrice> catalogue, Map.Entry<ItemType, Integer> item, int numberOfFreebies) {
         Set<Integer> prices = new HashSet<>();
         AtomicReference<Freebies> freebies = new AtomicReference<>();
         ItemType itemType = item.getKey();
-        ItemPrice itemPrice = ItemToPriceMap.get(itemType);
+        ItemPrice itemPrice = catalogue.get(itemType);
         int numberOfItems = item.getValue() - numberOfFreebies;
         if (itemPrice.getSpecialOffers().isPresent()) {
             List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
@@ -165,3 +167,4 @@ public class CheckoutCalculator {
     }
 
 }
+
