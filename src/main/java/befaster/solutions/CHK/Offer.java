@@ -60,4 +60,3 @@ public class Offer {
         return frequency;
     }
 }
-
