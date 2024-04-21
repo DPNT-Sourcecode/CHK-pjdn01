@@ -34,16 +34,17 @@ public class CheckoutSolution {
             if (itemPrice == null) {
                 return -1d;
             }
-            final Integer unitPrice = itemPrice.getUnitPrice();
-            final Optional<Integer> specialOfferQuantity = itemPrice.getSpecialOfferQuantity();
-            final Optional<Integer> specialOfferPrice = itemPrice.getSpecialOfferPrice();
-            if (specialOfferQuantity.isPresent() && specialOfferPrice.isPresent()) {
-
-                int specialQuantityUnit = Math.floorMod(item.getValue(), specialOfferQuantity.get());
-                int remainingUnits = specialOfferQuantity.get() - specialQuantityUnit;
-//                totalCost += (specialQuantityUnit * specialOfferPrice)
+            final Double unitPrice = itemPrice.getUnitPrice();
+            final Optional<Double> specialOfferPrice = itemPrice.getSpecialOfferPrice();
+            final Optional<Double> specialOfferQuantity = itemPrice.getSpecialOfferQuantity();
+            if (specialOfferPrice.isPresent()) {
+                Integer specialQuantityUnit = Math.floorMod(Long.valueOf(item.getValue()), Long.valueOf(specialOfferQuantity.get()));
             }
         }
     }
 
+    private Integer
+    
+
 }
+

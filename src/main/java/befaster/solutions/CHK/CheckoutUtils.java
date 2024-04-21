@@ -6,9 +6,10 @@ public class CheckoutUtils {
 
     public static final Map<ItemType, ItemPrice> ItemToPriceMap =
             Map.of(
-                    ItemType.A, new ItemPrice(50, 130, 3),
-                    ItemType.B, new ItemPrice(30, 45, 2),
-                    ItemType.C, new ItemPrice(20),
-                    ItemType.D, new ItemPrice(15)
+                    ItemType.A, new ItemPrice(50d, 130d, 3d),
+                    ItemType.B, new ItemPrice(30d, 45d, 2d),
+                    ItemType.C, new ItemPrice(20d),
+                    ItemType.D, new ItemPrice(15d)
             );
 }
+
