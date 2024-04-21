@@ -43,4 +43,3 @@ public class Catalogue implements Serializable {
             "GroupA", new GroupDiscount(3, 45)
     );
 }
-

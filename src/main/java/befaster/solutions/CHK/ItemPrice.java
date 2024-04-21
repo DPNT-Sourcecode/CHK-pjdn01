@@ -24,4 +24,3 @@ public class ItemPrice {
         return specialOffers != null ? Optional.of(specialOffers) : Optional.empty();
     }
 }
-
