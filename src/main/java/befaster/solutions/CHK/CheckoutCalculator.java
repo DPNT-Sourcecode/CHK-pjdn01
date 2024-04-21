@@ -120,7 +120,7 @@ public class CheckoutCalculator {
                     int offerQuantityUnit = numberOfItems / maxOfferQuantity;
                     Offer offer = offers.stream().filter(o -> o.getQuantity() == maxOfferQuantity).findFirst().orElseThrow();
                     prices.add(offerQuantityUnit * offer.getUnitPrice());
-                } else if (maxOfferQuantity > 0 && totalOfferQuantity <= numberOfItems) {
+                } else if (totalOfferQuantity > 0 && totalOfferQuantity <= numberOfItems) {
                     int offerQuantityUnit = numberOfItems / totalOfferQuantity;
                     AtomicInteger totalCost = new AtomicInteger();
                     offers.forEach(offer -> totalCost.addAndGet(offerQuantityUnit * offer.getUnitPrice()));
@@ -167,3 +167,4 @@ public class CheckoutCalculator {
     }
 
 }
+
