@@ -2,6 +2,7 @@ package befaster.solutions.CHK;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Catalogue implements Serializable {
@@ -14,7 +15,7 @@ public class Catalogue implements Serializable {
             Map<String, Object> value = (Map<String, Object>) item.getValue();
             Map<String, Object> specialOffers = ((Map<String, Object>) value.get("specialOffers"));
             if (specialOffers != null) {
-                Map<String, Object> offers = (Map<String, Object>) specialOffers.get("offers");
+                List<Offer> offers = (List<Offer>) specialOffers.get("offers");
                 System.out.println(value);
             }
 
@@ -25,6 +26,7 @@ public class Catalogue implements Serializable {
         return newData;
     }
 }
+
 
 
 
