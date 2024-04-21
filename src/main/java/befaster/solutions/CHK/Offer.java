@@ -8,7 +8,7 @@ public class Offer {
     private final Integer freebieUnit;
     private final Integer frequency;
 
-    private final String groupDiscountName;
+    private final ItemType groupDiscountName;
 
     public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType) {
         this.quantity = quantity;
@@ -40,7 +40,7 @@ public class Offer {
         this.groupDiscountName = null;
     }
 
-    public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit, Integer frequency, String groupDiscountName) {
+    public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit, Integer frequency, ItemType groupDiscountName) {
         this.quantity = quantity;
         this.itemType = itemType;
         this.unitPrice = unitPrice;
@@ -75,7 +75,8 @@ public class Offer {
         return frequency;
     }
 
-    public String getGroupDiscountName() {
+    public ItemType getGroupDiscountName() {
         return groupDiscountName;
     }
 }
+

@@ -34,6 +34,9 @@ public enum ItemType implements Serializable {
     X("X"),
     Y("Y"),
     Z("Z"),
+
+    //Group Names
+    GROUP_1("Group_1"),
     UNKNOWN("UNKNOWN");
 
     private static final Map<String, ItemType> enums = new HashMap<>(5);
@@ -64,3 +67,4 @@ public enum ItemType implements Serializable {
         return this.type;
     }
 }
+

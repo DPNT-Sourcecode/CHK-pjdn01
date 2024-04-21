@@ -1,2 +1,20 @@
-package befaster.solutions.CHK;public class ItemGroup {
+package befaster.solutions.CHK;
+
+public class GroupMember {
+    private final ItemPrice itemPrice;
+    private final int quantity;
+
+    public GroupMember(ItemPrice itemPrice, int quantity) {
+        this.itemPrice = itemPrice;
+        this.quantity = quantity;
+    }
+
+    public ItemPrice getItemPrice() {
+        return itemPrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }
+

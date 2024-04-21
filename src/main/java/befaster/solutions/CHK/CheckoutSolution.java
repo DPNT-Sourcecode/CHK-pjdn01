@@ -4,9 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import static befaster.solutions.CHK.Catalogue.buildCatalogue;
+import static befaster.solutions.CHK.Catalogue.*;
 import static befaster.solutions.CHK.CheckoutCalculator.calculateTotalCost;
 
 public class CheckoutSolution {
@@ -27,7 +29,8 @@ public class CheckoutSolution {
             ObjectMapper mapper = new ObjectMapper();
             Map<Object, Object> data = mapper.readValue(new FileReader(filename), Map.class);
             Map<ItemType, ItemPrice> catalogue = buildCatalogue(data);
-            Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
+            Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus, catalogue, false);
+            Map<ItemType, Group> groupMap = buildGroup(skus, catalogue);
             Integer totalCost = calculateTotalCost(itemToCountMap, catalogue);
             return totalCost;
         } catch (Exception e) {
@@ -36,11 +39,49 @@ public class CheckoutSolution {
         }
     }
 
-    private static Map<ItemType, Integer> getItemToCountMap(String skus) {
+    private static Map<ItemType, Integer> getItemToCountMap(String skus, Map<ItemType, ItemPrice> catalogue, boolean getGroupMembers) {
         Map<ItemType, Integer> itemToCountMap = new HashMap<>();
+
         for (String str : skus.split("")) {
-            itemToCountMap.merge(ItemType.forName(str), 1, Integer::sum);
+            ItemType itemType = ItemType.forName(str);
+            ItemPrice itemPrice = catalogue.get(itemType);
+            try {
+                ItemType discountName = itemPrice.getSpecialOffers()
+                        .orElseThrow().getOffers().iterator().next().getGroupDiscountName();
+                if (discountName == null && !getGroupMembers) {
+                    itemToCountMap.merge(itemType, 1, Integer::sum);
+                } else if (discountName != null && getGroupMembers) {
+                    itemToCountMap.merge(itemType, 1, Integer::sum);
+                }
+            } catch (Exception e) {
+                System.out.println("unknown item found");
+                itemToCountMap.merge(itemType, 1, Integer::sum);
+            }
         }
         return itemToCountMap;
     }
+
+    private static Map<ItemType, Group> buildGroup(String skus, Map<ItemType, ItemPrice> catalogue) {
+        Map<ItemType, Group> groupMap = new HashMap<>();
+        Map<ItemType, Integer> groupItems = getItemToCountMap(skus, catalogue, true);
+        GROUPS.forEach(groupName -> {
+            Map<ItemType, GroupMember> members = new HashMap<>();
+            for (ItemType itemType : groupItems.keySet()) {
+                ItemPrice itemPrice = catalogue.get(itemType);
+                Offer offer = itemPrice.getSpecialOffers().orElseThrow().getOffers().iterator().next();
+                if (offer.getGroupDiscountName() == groupName) {
+                    Group group = groupMap.get(itemType);
+                    if (group == null) {
+                        members.put(itemType, new GroupMember(catalogue.get(itemType), groupItems.get(itemType)));
+                        GroupDiscount discount = GROUP_DISCOUNT_MAP.get(groupName);
+                        groupMap.put(groupName, new Group(discount.getUnitPrice(), discount.getGroupQuantity(), members));
+                    } else {
+                        group.addGroupMember(itemType, new GroupMember(catalogue.get(itemType), groupItems.get(itemType)));
+                    }
+                }
+            }
+        });
+        return groupMap;
+    }
 }
+

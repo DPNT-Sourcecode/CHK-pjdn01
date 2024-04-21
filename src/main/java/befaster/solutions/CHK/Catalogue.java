@@ -1,10 +1,7 @@
 package befaster.solutions.CHK;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Catalogue implements Serializable {
     public static Map<ItemType, ItemPrice> buildCatalogue(Map<Object, Object> data) {
@@ -25,7 +22,7 @@ public class Catalogue implements Serializable {
                     ItemType offerItemType = offerMap.get("itemType") != null ? ItemType.forName(((String) offerMap.get("itemType"))) : null;
                     OfferType offerType = offerMap.get("offerType") != null ? OfferType.forName(((String) offerMap.get("offerType"))) : null;
                     Integer freebieUnit = offerMap.get("freebieUnit") != null ? (Integer) offerMap.get("freebieUnit") : null;
-                    String groupDiscountName = offerMap.get("groupDiscountName") != null ? (String) offerMap.get("groupDiscountName") : null;
+                    ItemType groupDiscountName = offerMap.get("groupDiscountName") != null ? ItemType.forName(((String) offerMap.get("groupDiscountName"))) : null;
                     offerList.add(
                             new Offer(quantity, offerItemType, offerUnitPrice, offerType, freebieUnit, frequency, groupDiscountName)
                     );
@@ -42,4 +39,7 @@ public class Catalogue implements Serializable {
     public static final Map<String, GroupDiscount> GROUP_DISCOUNT_MAP = Map.of(
             "GroupA", new GroupDiscount(3, 45)
     );
+
+    public static final List<ItemType> GROUPS = Arrays.asList(ItemType.GROUP_1);
 }
+

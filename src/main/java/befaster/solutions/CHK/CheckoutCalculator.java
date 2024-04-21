@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static befaster.solutions.CHK.Catalogue.GROUP_DISCOUNT_MAP;
+
 public class CheckoutCalculator {
     public static Integer calculateTotalCost(Map<ItemType, Integer> itemToCountMap, Map<ItemType, ItemPrice> catalogue) {
 
@@ -86,6 +88,8 @@ public class CheckoutCalculator {
         }
     }
 
+
+
     private static Integer getSum(Map<ItemType, ItemCheckoutPrice> itemCheckoutPrice) {
         return itemCheckoutPrice.values().stream()
                 .map(ItemCheckoutPrice::getPrice)
@@ -133,7 +137,8 @@ public class CheckoutCalculator {
                         prices.add(totalCost);
                     });
                 }
-            } else if (offerType == OfferType.FREEBIES) {
+            }
+            else if (offerType == OfferType.FREEBIES) {
 
                 offers.forEach(offer -> {
                     ItemType freebieItemType = offers.stream().iterator().next().getItemType();
@@ -154,8 +159,15 @@ public class CheckoutCalculator {
                     }
                 });
             }
+            else if (offerType == OfferType.GROUP_DISCOUNT) {
+                GroupDiscount groupDiscount = GROUP_DISCOUNT_MAP.get(
+                        offers.stream().iterator().next().getGroupDiscountName()
+                );
+                int discountQuantity = groupDiscount.getGroupQuantity();
+                int discountPrice = groupDiscount.getUnitPrice();
+            }
         }
-
+// STXS
         int totalCost = (numberOfItems * itemPrice.getUnitPrice());
         prices.add(totalCost);
 
@@ -165,3 +177,4 @@ public class CheckoutCalculator {
     }
 
 }
+
