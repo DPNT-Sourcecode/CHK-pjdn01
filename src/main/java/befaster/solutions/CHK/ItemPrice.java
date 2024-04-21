@@ -31,4 +31,3 @@ public class ItemPrice {
         return !Double.isNaN(specialOfferQuantity) ? Optional.of(specialOfferQuantity) : Optional.empty();
     }
 }
-
