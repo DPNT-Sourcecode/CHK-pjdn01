@@ -7,7 +7,7 @@ public class ItemCheckoutPrice {
     private final Freebies freebies;
     private final Integer price;
 
-    public ItemCheckoutPrice(Freebies freebies, Integer price) {
+    public ItemCheckoutPrice(Integer price, Freebies freebies) {
         this.freebies = freebies;
         this.price = price;
     }
@@ -25,4 +25,5 @@ public class ItemCheckoutPrice {
         return price;
     }
 }
+
 

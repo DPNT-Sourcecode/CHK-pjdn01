@@ -78,6 +78,15 @@ public class CheckoutCalculator {
         for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
             itemCheckoutPrice.put(ItemType.forName(item.getKey()), calculateBestOfferPrice(item));
         }
+        Optional<Optional<Freebies>> hasFreebies = itemCheckoutPrice.values().stream()
+                .map(ItemCheckoutPrice::getFreebies)
+                .filter(Objects::nonNull)
+                .map(Optional::of)
+                .findFirst()
+                .orElse(Optional.empty());
+        if (hasFreebies.isEmpty()) {
+            return  Collections.sum
+        }
         return -1;
     }
 
@@ -122,7 +131,9 @@ public class CheckoutCalculator {
         int totalCost = (item.getValue() * itemPrice.getUnitPrice());
         prices.add(totalCost);
 
-        return Collections.min(prices);
+        Integer minPrice = Collections.min(prices);
+
+        return new ItemCheckoutPrice(minPrice, freebies.get());
     }
 
     private static void applyFreebiesOnItem(Map.Entry<String, Integer> item, int quantity) {
@@ -140,4 +151,5 @@ public class CheckoutCalculator {
     }
 
 }
+
 
