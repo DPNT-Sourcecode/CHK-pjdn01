@@ -29,9 +29,13 @@ public class CheckoutSolution {
     private Double computeTotalCost(Map<String, Integer> itemToCountMap) {
         Double totalCost = 0d;
         for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
-            ItemPrice itemPrice = ItemToPriceMap.get(item.getKey());
-//            Double modulo = Math.floorMod()
+            ItemPrice itemPrice = ItemToPriceMap.get(ItemType.forName(item.getKey()));
+            if (itemPrice == null) {
+                return -1d;
+            }
+            
         }
     }
 
 }
+

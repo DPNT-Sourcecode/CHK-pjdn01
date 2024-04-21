@@ -10,12 +10,14 @@ public enum ItemType {
     D("D"),
     UNKNOWN("UNKNOWN");
 
-    private static  final Map<String, ItemType> enums = new HashMap<>(5);
+    private static final Map<String, ItemType> enums = new HashMap<>(5);
+
     static {
-        for(ItemType itemType: ItemType.values()){
+        for (ItemType itemType : ItemType.values()) {
             enums.put(itemType.type, itemType);
         }
     }
+
     private final String type;
 
     ItemType(String type) {
@@ -23,11 +25,16 @@ public enum ItemType {
     }
 
     public static ItemType forName(String name) {
-        ItemType itemType =
+        ItemType itemType = enums.get(name);
+        if (itemType == null) {
+            return UNKNOWN;
+        }
+        return itemType;
     }
 
     public String toString() {
         return this.type;
     }
 }
+
 
