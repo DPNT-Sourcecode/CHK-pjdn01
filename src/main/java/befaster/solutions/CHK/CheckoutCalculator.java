@@ -132,7 +132,7 @@ public class CheckoutCalculator {
                 });
             }
         }
-        int totalCost = (item.getValue() * itemPrice.getUnitPrice());
+        int totalCost = (numberOfItems * itemPrice.getUnitPrice());
         prices.add(totalCost);
 
         Integer minPrice = Collections.min(prices);
@@ -176,5 +176,6 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
 
