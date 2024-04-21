@@ -41,12 +41,13 @@ public class CheckoutSolution {
 
                 int specialQuantityUnit = Math.floorMod(item.getValue(), specialOfferQuantity.get());
                 int remainingUnits = specialOfferQuantity.get() - specialQuantityUnit;
-                totalCost += (specialQuantityUnit * specialOfferPrice)
+//                totalCost += (specialQuantityUnit * specialOfferPrice)
             }
         }
     }
 
 }
+
 
 
 
