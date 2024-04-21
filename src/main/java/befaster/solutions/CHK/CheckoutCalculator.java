@@ -7,10 +7,9 @@ import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap2;
 
 public class CheckoutCalculator {
-    public static Integer calculateTotalCost(Map<String, Integer> itemToCountMap) {
+    public static Integer calculateTotalCost(Map<ItemType, Integer> itemToCountMap) {
 
         Optional<ItemType> hasUnknownItem = itemToCountMap.keySet().stream()
-                .map(ItemType::forName)
                 .filter(type -> type == ItemType.UNKNOWN)
                 .map(Optional::of)
                 .findFirst()
@@ -21,7 +20,6 @@ public class CheckoutCalculator {
         }
 
         Optional<Optional<SpecialOffers>> hasSpecialOffers = itemToCountMap.keySet().stream()
-                .map(ItemType::forName)
                 .filter(type -> type != ItemType.UNKNOWN)
                 .map(ItemToPriceMap2::get)
                 .map(ItemPrice::getSpecialOffers)
@@ -36,10 +34,10 @@ public class CheckoutCalculator {
         return complexCheckoutCal(itemToCountMap);
     }
 
-    private static int simpleCheckoutCal(Map<String, Integer> itemToCountMap) {
+    private static int simpleCheckoutCal(Map<ItemType, Integer> itemToCountMap) {
         int totalCost = 0;
-        for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
-            ItemPrice itemPrice = ItemToPriceMap.get(ItemType.forName(item.getKey()));
+        for (Map.Entry<ItemType, Integer> item : itemToCountMap.entrySet()) {
+            ItemPrice itemPrice = ItemToPriceMap.get(item.getKey());
             if (itemPrice == null) {
                 return -1;
             }
@@ -53,26 +51,7 @@ public class CheckoutCalculator {
         return totalCost;
     }
 
-    private static int complexCheckoutCal(Map<String, Integer> itemToCountMap) {
-        // EEBB
-        int totalCost = 0;
-        for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
-            ItemPrice itemPrice = ItemToPriceMap2.get(ItemType.forName(item.getKey()));
-            if (itemPrice == null) {
-                return -1;
-            }
-            final Integer unitPrice = itemPrice.getUnitPrice();
-
-            if (unitPrice == null) {
-                return -1;
-            }
-            totalCost += (item.getValue() * unitPrice);
-        }
-        return totalCost;
-
-    }
-
-    private static int options(Map<ItemType, Integer> itemToCountMap) {
+    private static int complexCheckoutCal(Map<ItemType, Integer> itemToCountMap) {
         // EEBB
         Map<ItemType, ItemCheckoutPrice> itemCheckoutPrice = new HashMap<>();
         for (Map.Entry<ItemType, Integer> item : itemToCountMap.entrySet()) {
@@ -86,9 +65,7 @@ public class CheckoutCalculator {
                 .orElse(Optional.empty());
 
         if (hasFreebies.isEmpty()) {
-            return itemCheckoutPrice.values().stream()
-                    .map(ItemCheckoutPrice::getPrice)
-                    .reduce(Integer::sum).orElse(-1);
+            return getSum(itemCheckoutPrice);
         } else {
             Map<ItemType, ItemCheckoutPrice> itemCheckoutPriceWithFreebies = new HashMap<>();
             for (Map.Entry<ItemType, ItemCheckoutPrice> item : itemCheckoutPrice.entrySet()) {
@@ -99,8 +76,23 @@ public class CheckoutCalculator {
                     itemCheckoutPriceWithFreebies.put(freebie.getItemType(), calculateBestOfferPrice(freebieItem, freebie.getQuantity()));
                 }
             }
+            if (!itemCheckoutPriceWithFreebies.isEmpty()) {
+                for (Map.Entry<ItemType, ItemCheckoutPrice> item : itemCheckoutPriceWithFreebies.entrySet()) {
+                    ItemType itemType = item.getKey();
+                    int currentPrice = itemCheckoutPrice.get(itemType).getPrice();
+                    int freebiePrice = item.getValue().getPrice();
+                    Integer minimumPrice = Math.min(currentPrice, freebiePrice);
+                    itemCheckoutPrice.put(itemType, new ItemCheckoutPrice(minimumPrice));
+                }
+            }
+            return getSum(itemCheckoutPrice);
         }
-        return -1;
+    }
+
+    private static Integer getSum(Map<ItemType, ItemCheckoutPrice> itemCheckoutPrice) {
+        return itemCheckoutPrice.values().stream()
+                .map(ItemCheckoutPrice::getPrice)
+                .reduce(Integer::sum).orElse(-1);
     }
 
     private static ItemCheckoutPrice calculateBestOfferPrice(Map.Entry<ItemType, Integer> item) {
@@ -149,20 +141,17 @@ public class CheckoutCalculator {
         return new ItemCheckoutPrice(minPrice, freebies.get());
     }
 
-    private static void applyFreebiesOnItem(Map.Entry<String, Integer> item, int quantity) {
-
-    }
-
-    private static void updateCheckoutPrice(Map<ItemType, List<Integer>> itemCheckoutPrice, ItemType itemType, int totalCost) {
-        List<Integer> checkoutPrices = itemCheckoutPrice.get(itemType);
-        if (checkoutPrices == null) {
-            itemCheckoutPrice.put(itemType, List.of(totalCost));
-        } else {
-            checkoutPrices.add(totalCost);
-            itemCheckoutPrice.put(itemType, checkoutPrices);
-        }
-    }
+//    private static void updateCheckoutPrice(Map<ItemType, List<Integer>> itemCheckoutPrice, ItemType itemType, int totalCost) {
+//        List<Integer> checkoutPrices = itemCheckoutPrice.get(itemType);
+//        if (checkoutPrices == null) {
+//            itemCheckoutPrice.put(itemType, List.of(totalCost));
+//        } else {
+//            checkoutPrices.add(totalCost);
+//            itemCheckoutPrice.put(itemType, checkoutPrices);
+//        }
+//    }
 
 }
+
 
 

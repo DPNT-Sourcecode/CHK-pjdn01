@@ -4,16 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static befaster.solutions.CHK.CheckoutCalculator.calculateTotalCost;
 import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 
 public class CheckoutSolution {
+
+    public static void main(String[] args) {
+        Integer check = checkout("AAAAA");
+        System.out.println(check);
+    }
     public static Integer checkout(String skus) {
         if (skus == null || skus.isEmpty()) {
             return 0;
         }
         Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
-//        return computeTotalCost(itemToCountMap);
+        Integer totalCost = calculateTotalCost(itemToCountMap);
+        return totalCost;
     }
 
     private static Map<ItemType, Integer> getItemToCountMap(String skus) {
@@ -23,31 +30,6 @@ public class CheckoutSolution {
         }
         return itemToCountMap;
     }
-
-    private static Integer computeTotalCost(Map<String, Integer> itemToCountMap) {
-        int totalCost = 0;
-        for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
-            ItemPrice itemPrice = ItemToPriceMap.get(ItemType.forName(item.getKey()));
-            if (itemPrice == null) {
-                return -1;
-            }
-            final Integer unitPrice = itemPrice.getUnitPrice();
-
-            if (unitPrice == null) {
-                return -1;
-            }
-
-            final Optional<Integer> specialOfferPrice = itemPrice.getSpecialOfferPrice();
-            final Optional<Integer> specialOfferQuantity = itemPrice.getSpecialOfferQuantity();
-            if (specialOfferPrice.isPresent() && specialOfferQuantity.isPresent()) {
-                int specialQuantityUnit = item.getValue() / specialOfferQuantity.get();
-                int remainingQuantity = item.getValue() - (specialQuantityUnit * specialOfferQuantity.get());
-                totalCost += (specialQuantityUnit * specialOfferPrice.get()) + (remainingQuantity * unitPrice);
-            } else {
-                totalCost += (item.getValue() * unitPrice);
-            }
-        }
-        return totalCost;
-    }
 }
+
 
