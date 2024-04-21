@@ -214,7 +214,8 @@ public class CheckoutCalculator {
             int quantityUnit = numberOfItems / group.getQuantity();
             int remainingQuantity = numberOfItems - (quantityUnit * group.getQuantity());
 
-
+            Collections.reverse(fullUnitPriceList);
+            
 //            for (Map.Entry<ItemType, Integer> unitMap : itemToUnitPriceMap.entrySet()) {
 //                group.
 ////                for (int i = 0; i < )
@@ -254,3 +255,4 @@ public class CheckoutCalculator {
     }
 
 }
+
