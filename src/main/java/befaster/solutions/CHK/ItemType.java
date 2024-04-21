@@ -1,5 +1,6 @@
 package befaster.solutions.CHK;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.io.Serializable;
@@ -30,6 +31,7 @@ public enum ItemType implements Serializable {
         this.type = type;
     }
 
+    @JsonCreator
     public static ItemType forName(String name) {
         ItemType itemType = enums.get(name);
         if (itemType == null) {
@@ -43,5 +45,6 @@ public enum ItemType implements Serializable {
         return this.type;
     }
 }
+
 
 
