@@ -1,5 +1,7 @@
 package befaster.solutions.CHK;
 
+import com.google.gson.Gson;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +17,8 @@ public class CheckoutSolution {
         if (skus == null || skus.isEmpty()) {
             return 0;
         }
-        ObjectMapper mapper = new ObjectMapper();
+        Gson gson = new Gson();
+
         Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
         Integer totalCost = calculateTotalCost(itemToCountMap);
@@ -30,3 +33,4 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
