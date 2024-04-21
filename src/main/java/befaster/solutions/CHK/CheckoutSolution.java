@@ -26,10 +26,13 @@ public class CheckoutSolution {
 
     private Double computeTotalCost(Map<String, Integer> itemToCountMap) {
         Double totalCost = 0d;
-        
+        for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
+            
+        }
     }
 
 }
+
 
 
 
