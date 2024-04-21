@@ -12,6 +12,7 @@ public class Catalogue implements Serializable {
         for (Map.Entry<Object, Object> item : data.entrySet()) {
             ItemType keyStr = ItemType.forName((String) item.getKey());
             Map<String, Object> value = (Map<String, Object>) item.getValue();
+
             System.out.println(value);
 
 //            ItemPrice value = (ItemPrice) item.getValue();
@@ -19,4 +20,5 @@ public class Catalogue implements Serializable {
         return newData;
     }
 }
+
 
