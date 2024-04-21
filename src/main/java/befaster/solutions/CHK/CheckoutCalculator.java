@@ -126,7 +126,7 @@ public class CheckoutCalculator {
                         int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingQuantity * itemPrice.getUnitPrice());
                         prices.add(totalCost);
                     }
-                    if (offer.getFreebieUnit() > 0) {
+                    if (offer.getFreebieUnit() > 0 && numberOfItems >= offer.getQuantity()) {
                         freebies.set(new Freebies(offer.getItemType(), offer.getFreebieUnit() * offerQuantityUnit));
                     }
                 });
@@ -151,9 +151,3 @@ public class CheckoutCalculator {
 //    }
 
 }
-
-
-
-
-
-

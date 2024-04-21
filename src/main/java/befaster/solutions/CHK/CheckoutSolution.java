@@ -31,6 +31,3 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
-
-
-
