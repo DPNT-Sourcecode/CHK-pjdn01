@@ -1,5 +1,7 @@
 package befaster.solutions.CHK;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +37,9 @@ public enum ItemType {
         return itemType;
     }
 
+    @JsonValue
     public String toString() {
         return this.type;
     }
 }
+
