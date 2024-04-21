@@ -2,7 +2,19 @@ package befaster.solutions.CHK;
 
 import java.util.Map;
 
+import static java.util.Map.entry;
+
 public class CheckoutUtils {
+
+    public static final Map<ItemType, ItemPrice> ItemToPriceMap2 = Map.ofEntries(
+            entry(
+                    ItemType.A, new ItemPrice(50,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(3, ItemType.A, 130, OfferType.DISCOUNT)
+                                    .withOffer(5, ItemType.A, 200, OfferType.DISCOUNT)
+                                    .build()
+                    )
+            ));
     public static final Map<ItemType, ItemPrice> ItemToPriceMap =
             Map.of(
                     ItemType.A, new ItemPrice(50,
@@ -58,6 +70,7 @@ public class CheckoutUtils {
                                     .withOffer(2, ItemType.F, 0, OfferType.FREEBIES, 1, 3)
                                     .build()
                     ),
-            );
+                    );
 }
+
 
