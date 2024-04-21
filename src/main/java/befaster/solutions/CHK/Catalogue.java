@@ -15,7 +15,11 @@ public class Catalogue implements Serializable {
             Map<String, Object> value = (Map<String, Object>) item.getValue();
             Map<String, Object> specialOffers = ((Map<String, Object>) value.get("specialOffers"));
             if (specialOffers != null) {
-                List<Offer> offers = (List<Offer>) specialOffers.get("offers");
+                List<Object> offers = (List<Object>) specialOffers.get("offers");
+                for (Object offer : offers) {
+                    Map<String, Object> offerMap = ((Map<String, Object>) offer);
+                    System.out.println(value);
+                }
                 System.out.println(value);
             }
 
@@ -26,6 +30,7 @@ public class Catalogue implements Serializable {
         return newData;
     }
 }
+
 
 
 
