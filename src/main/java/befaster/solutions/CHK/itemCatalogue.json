@@ -167,10 +167,24 @@
     }
   },
   "S": {
-    "unitPrice": 20
+    "unitPrice": 20,
+    "specialOffers": {
+      "offers": [
+        {
+          "groupDiscountName": "GroupA"
+        }
+      ]
+    }
   },
   "T": {
-    "unitPrice": 20
+    "unitPrice": 20,
+    "specialOffers": {
+      "offers": [
+        {
+          "groupDiscountName": "GroupA"
+        }
+      ]
+    }
   },
   "U": {
     "unitPrice": 40,
@@ -209,13 +223,35 @@
     "unitPrice": 20
   },
   "X": {
-    "unitPrice": 17
+    "unitPrice": 17,
+    "specialOffers": {
+      "offers": [
+        {
+          "groupDiscountName": "GroupA"
+        }
+      ]
+    }
   },
   "Y": {
-    "unitPrice": 20
+    "unitPrice": 20,
+    "specialOffers": {
+      "offers": [
+        {
+          "groupDiscountName": "GroupA"
+        }
+      ]
+    }
   },
   "Z": {
-    "unitPrice": 21
+    "unitPrice": 21,
+    "specialOffers": {
+      "offers": [
+        {
+          "groupDiscountName": "GroupA"
+        }
+      ]
+    }
   }
 }
+
 

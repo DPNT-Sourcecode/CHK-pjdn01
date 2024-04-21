@@ -25,16 +25,22 @@ public class Catalogue implements Serializable {
                     ItemType offerItemType = offerMap.get("itemType") != null ? ItemType.forName(((String) offerMap.get("itemType"))) : null;
                     OfferType offerType = offerMap.get("offerType") != null ? OfferType.forName(((String) offerMap.get("offerType"))) : null;
                     Integer freebieUnit = offerMap.get("freebieUnit") != null ? (Integer) offerMap.get("freebieUnit") : null;
+                    String groupDiscountName = offerMap.get("groupDiscountName") != null ? (String) offerMap.get("groupDiscountName") : null;
                     offerList.add(
-                            new Offer(quantity, offerItemType, offerUnitPrice, offerType, freebieUnit, frequency)
+                            new Offer(quantity, offerItemType, offerUnitPrice, offerType, freebieUnit, frequency, groupDiscountName)
                     );
                 }
                 newData.put(itemType, new ItemPrice(unitPrice,
-                        new SpecialOffers.SpecialOffersBuilder().withOffers(offerList).build()) );
+                        new SpecialOffers.SpecialOffersBuilder().withOffers(offerList).build()));
             } else {
                 newData.put(itemType, new ItemPrice(unitPrice));
             }
         }
         return newData;
     }
+
+    public static final Map<String, GroupDiscount> GROUP_DISCOUNT_MAP = Map.of(
+            "GroupA", new GroupDiscount(3, 45)
+    );
 }
+

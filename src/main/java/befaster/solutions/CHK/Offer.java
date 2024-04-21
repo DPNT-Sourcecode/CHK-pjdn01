@@ -8,13 +8,16 @@ public class Offer {
     private final Integer freebieUnit;
     private final Integer frequency;
 
+    private final String groupDiscountName;
+
     public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType) {
         this.quantity = quantity;
         this.itemType = itemType;
         this.unitPrice = unitPrice;
         this.offerType = offerType;
-        this.freebieUnit = 0;
-        this.frequency = 0;
+        this.freebieUnit = null;
+        this.frequency = null;
+        this.groupDiscountName = null;
     }
 
     public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit) {
@@ -23,7 +26,8 @@ public class Offer {
         this.unitPrice = unitPrice;
         this.offerType = offerType;
         this.freebieUnit = freebieUnit;
-        this.frequency = 0;
+        this.frequency = null;
+        this.groupDiscountName = null;
     }
 
     public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit, Integer frequency) {
@@ -33,6 +37,17 @@ public class Offer {
         this.offerType = offerType;
         this.freebieUnit = freebieUnit;
         this.frequency = frequency;
+        this.groupDiscountName = null;
+    }
+
+    public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit, Integer frequency, String groupDiscountName) {
+        this.quantity = quantity;
+        this.itemType = itemType;
+        this.unitPrice = unitPrice;
+        this.offerType = offerType;
+        this.freebieUnit = freebieUnit;
+        this.frequency = frequency;
+        this.groupDiscountName = groupDiscountName;
     }
 
 
@@ -59,4 +74,9 @@ public class Offer {
     public Integer getFrequency() {
         return frequency;
     }
+
+    public String getGroupDiscountName() {
+        return groupDiscountName;
+    }
 }
+
