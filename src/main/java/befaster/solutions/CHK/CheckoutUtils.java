@@ -23,11 +23,12 @@ public class CheckoutUtils {
                                     .withOffer(2, ItemType.B, 0, OfferType.FREEBIES, 1)
                                     .build()
                     ),
-                    ItemType.F, new ItemPrice(40,
+                    ItemType.F, new ItemPrice(10,
                             new SpecialOffers.SpecialOffersBuilder()
                                     .withOffer(2, ItemType.F, 0, OfferType.FREEBIES, 1)
                                     .build()
                     )
             );
 }
+
 
