@@ -36,15 +36,14 @@ public class CheckoutSolution {
             }
             final Double unitPrice = itemPrice.getUnitPrice();
             final Optional<Double> specialOfferPrice = itemPrice.getSpecialOfferPrice();
-            final Optional<Double> specialOfferQuantity = itemPrice.getSpecialOfferQuantity();
+            final Optional<Integer> specialOfferQuantity = itemPrice.getSpecialOfferQuantity();
             if (specialOfferPrice.isPresent()) {
-                Integer specialQuantityUnit = Math.floorMod(Long.valueOf(item.getValue()), Long.valueOf(specialOfferQuantity.get()));
+                Integer specialQuantityUnit = Math.floorMod(item.getValue(), specialOfferQuantity.get());
             }
         }
     }
-
-    private Integer
     
 
 }
+
 
