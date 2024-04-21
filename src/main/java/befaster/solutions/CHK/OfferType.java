@@ -5,6 +5,7 @@ import java.util.Map;
 
 public enum OfferType {
     DISCOUNT("Discount"),
+    GROUP_DISCOUNT("GroupDiscount"),
     FREEBIES("Freebies"),
     UNKNOWN("UNKNOWN");
 
@@ -34,3 +35,4 @@ public enum OfferType {
         return this.type;
     }
 }
+

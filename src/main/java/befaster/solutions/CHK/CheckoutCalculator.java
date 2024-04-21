@@ -4,8 +4,6 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-//import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
-
 public class CheckoutCalculator {
     public static Integer calculateTotalCost(Map<ItemType, Integer> itemToCountMap, Map<ItemType, ItemPrice> catalogue) {
 
@@ -167,3 +165,4 @@ public class CheckoutCalculator {
     }
 
 }
+

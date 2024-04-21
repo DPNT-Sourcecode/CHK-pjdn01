@@ -171,7 +171,8 @@
     "specialOffers": {
       "offers": [
         {
-          "groupDiscountName": "GroupA"
+          "groupDiscountName": "GroupA",
+          "offerType": "GroupDiscount"
         }
       ]
     }
@@ -181,7 +182,8 @@
     "specialOffers": {
       "offers": [
         {
-          "groupDiscountName": "GroupA"
+          "groupDiscountName": "GroupA",
+          "offerType": "GroupDiscount"
         }
       ]
     }
@@ -227,7 +229,8 @@
     "specialOffers": {
       "offers": [
         {
-          "groupDiscountName": "GroupA"
+          "groupDiscountName": "GroupA",
+          "offerType": "GroupDiscount"
         }
       ]
     }
@@ -237,7 +240,8 @@
     "specialOffers": {
       "offers": [
         {
-          "groupDiscountName": "GroupA"
+          "groupDiscountName": "GroupA",
+          "offerType": "GroupDiscount"
         }
       ]
     }
@@ -247,11 +251,13 @@
     "specialOffers": {
       "offers": [
         {
-          "groupDiscountName": "GroupA"
+          "groupDiscountName": "GroupA",
+          "offerType": "GroupDiscount"
         }
       ]
     }
   }
 }
+
 
 
