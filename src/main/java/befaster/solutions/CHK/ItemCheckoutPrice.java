@@ -1,13 +1,28 @@
 package befaster.solutions.CHK;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ItemCheckoutPrice {
-    private final ItemType itemType;
-    private final List<Integer> prices;
+    private final Freebies freebies;
+    private final Integer price;
 
-    public ItemCheckoutPrice(ItemType itemType, List<Integer> prices) {
-        this.itemType = itemType;
-        this.prices = prices;
+    public ItemCheckoutPrice(Freebies freebies, Integer price) {
+        this.freebies = freebies;
+        this.price = price;
+    }
+
+    public ItemCheckoutPrice(Integer price) {
+        this.freebies = null;
+        this.price = price;
+    }
+
+    public Optional<Freebies> getFreebies() {
+        return freebies != null ? Optional.of(freebies) : Optional.empty();
+    }
+
+    public Integer getPrice() {
+        return price;
     }
 }
+

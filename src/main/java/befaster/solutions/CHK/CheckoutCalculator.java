@@ -1,6 +1,7 @@
 package befaster.solutions.CHK;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap2;
@@ -73,19 +74,20 @@ public class CheckoutCalculator {
 
     private static int options(Map<String, Integer> itemToCountMap) {
         // EEBB
-        Map<ItemType, Integer> itemCheckoutPrice = new HashMap<>();
+        Map<ItemType, ItemCheckoutPrice> itemCheckoutPrice = new HashMap<>();
         for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
             itemCheckoutPrice.put(ItemType.forName(item.getKey()), calculateBestOfferPrice(item));
         }
         return -1;
     }
 
-    private static Integer calculateBestOfferPrice(Map.Entry<String, Integer> item) {
+    private static ItemCheckoutPrice calculateBestOfferPrice(Map.Entry<String, Integer> item) {
         return calculateBestOfferPrice(item, 0);
     }
 
-    private static Integer calculateBestOfferPrice(Map.Entry<String, Integer> item, int numberOfFreebies) {
+    private static ItemCheckoutPrice calculateBestOfferPrice(Map.Entry<String, Integer> item, int numberOfFreebies) {
         Set<Integer> prices = new HashSet<>();
+        AtomicReference<Freebies> freebies = new AtomicReference<>();
         ItemType itemType = ItemType.forName(item.getKey());
         ItemPrice itemPrice = ItemToPriceMap2.get(itemType);
         int quantity = item.getValue() - numberOfFreebies;
@@ -111,6 +113,9 @@ public class CheckoutCalculator {
                         int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingQuantity * itemPrice.getUnitPrice());
                         prices.add(totalCost);
                     }
+                    if (offer.getFreebieUnit() > 0) {
+                        freebies.set(new Freebies(offer.getItemType(), offer.getFreebieUnit()));
+                    }
                 });
             }
         }
@@ -135,3 +140,4 @@ public class CheckoutCalculator {
     }
 
 }
+

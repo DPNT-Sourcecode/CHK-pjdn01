@@ -5,12 +5,22 @@ public class Offer {
     private final ItemType itemType;
     private final int unitPrice;
     private final OfferType offerType;
+    private final int freebieUnit;
 
     public Offer(int quantity, ItemType itemType, int unitPrice, OfferType offerType) {
         this.quantity = quantity;
         this.itemType = itemType;
         this.unitPrice = unitPrice;
         this.offerType = offerType;
+        this.freebieUnit = 0;
+    }
+
+    public Offer(int quantity, ItemType itemType, int unitPrice, OfferType offerType, int freebieUnit) {
+        this.quantity = quantity;
+        this.itemType = itemType;
+        this.unitPrice = unitPrice;
+        this.offerType = offerType;
+        this.freebieUnit = freebieUnit;
     }
 
     public int getQuantity() {
@@ -28,4 +38,9 @@ public class Offer {
     public OfferType getOfferType() {
         return offerType;
     }
+
+    public int getFreebieUnit() {
+        return freebieUnit;
+    }
 }
+

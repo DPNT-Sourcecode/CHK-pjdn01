@@ -28,8 +28,9 @@ public class CheckoutUtils {
                     ItemType.D, new ItemPrice(15),
                     ItemType.E, new ItemPrice(40,
                             new SpecialOffers.SpecialOffersBuilder()
-                                    .withOffer(2, ItemType.B, 0, OfferType.FREEBIES)
+                                    .withOffer(2, ItemType.B, 0, OfferType.FREEBIES, 1)
                                     .build()
                     )
             );
 }
+
