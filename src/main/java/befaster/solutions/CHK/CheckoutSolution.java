@@ -8,7 +8,11 @@ import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 
 public class CheckoutSolution {
 
-    public Integer checkout(String skus) {
+    public static void main(String[] args) {
+        Integer check = checkout("A");
+        System.out.println(check);
+    }
+    public static Integer checkout(String skus) {
         if (skus == null || skus.isEmpty()) {
             return -1;
         }
@@ -17,7 +21,7 @@ public class CheckoutSolution {
         return computeTotalCost(itemToCountMap);
     }
 
-    private Map<String, Integer> getItemToCountMap(String skus) {
+    private static Map<String, Integer> getItemToCountMap(String skus) {
         Map<String, Integer> itemToCountMap = new HashMap<>();
         for (String str : skus.split("")) {
             itemToCountMap.merge(str, 1, Integer::sum);
@@ -25,7 +29,7 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 
-    private Integer computeTotalCost(Map<String, Integer> itemToCountMap) {
+    private static Integer computeTotalCost(Map<String, Integer> itemToCountMap) {
         int totalCost = 0;
         for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
             ItemPrice itemPrice = ItemToPriceMap.get(ItemType.forName(item.getKey()));
@@ -51,6 +55,7 @@ public class CheckoutSolution {
         return totalCost;
     }
 }
+
 
 
 
