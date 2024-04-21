@@ -7,5 +7,7 @@ public class CheckoutSolution {
         return null;
     }
 
+    private String
 
 }
+
