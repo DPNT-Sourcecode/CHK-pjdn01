@@ -1,5 +1,8 @@
 {
   "A": {
-
+    "unitPrice": 10,
+    "specialOffers": {
+      "off"
+    }
   }
 }
