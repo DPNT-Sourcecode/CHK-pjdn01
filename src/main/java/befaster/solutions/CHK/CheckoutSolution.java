@@ -18,6 +18,7 @@ public class CheckoutSolution {
             return 0;
         }
         Gson gson = new Gson();
+        Map<Object, Object> myObj =gson.fromJson()
 
         Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
@@ -33,4 +34,5 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
 
