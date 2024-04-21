@@ -94,18 +94,36 @@ public class CheckoutCalculator {
 
     }
 
-//    private static int options(Map<String, Integer> itemToCountMap) {
-//        // EEBB
-//        List<Integer> avaliableOptions = new ArrayList<>();
-//        for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
-//            ItemPrice itemPrice = ItemToPriceMap2.get(ItemType.forName(item.getKey()));
-//            if (itemPrice.getSpecialOffers().isPresent()) {
-//                SpecialOffers offers = itemPrice.getSpecialOffers().get();
-//
-//            }
-//        }
-//
-//
-//    }
+    private static int options(Map<String, Integer> itemToCountMap) {
+        // EEBB
+        List<Integer> avaliableOptions = new ArrayList<>();
+        Map<ItemType, List<Integer>> itemCheckoutPrice = new HashMap<>();
+        for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
+            ItemType itemType = ItemType.forName(item.getKey());
+            ItemPrice itemPrice = ItemToPriceMap2.get(itemType);
+            if (itemPrice.getSpecialOffers().isPresent()) {
+                List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
+                long offerItemTypes = offers.stream().map(Offer::getItemType).distinct().count();
+                if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
+                    offers.forEach(offer -> {
+                        int offerQuantityUnit = item.getValue() / offer.getQuantity();
+                        int remainingQuantity = item.getValue() - (offerQuantityUnit * offer.getQuantity());
+                        Integer totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingQuantity * itemPrice.getUnitPrice());
+                        List<Integer> merge = itemCheckoutPrice.merge(itemType, new ArrayList<> {totalCost},)
+//                        int specialQuantityUnit = item.getValue() / specialOfferQuantity.get();
+//                        int remainingQuantity = item.getValue() - (specialQuantityUnit * specialOfferQuantity.get());
+//                        totalCost += (specialQuantityUnit * specialOfferPrice.get()) + (remainingQuantity * unitPrice);
+                    });
+                }
+            }
+        }
+        return -1;
+    }
+
+    private List<Integer> updateCheckoutPrice(List<Integer> checkoutPrice, int newPrice) {
+        checkoutPrice.add(newPrice);
+        return checkoutPrice;
+    }
 
 }
+
