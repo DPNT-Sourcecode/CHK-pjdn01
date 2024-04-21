@@ -17,12 +17,12 @@ public class Catalogue implements Serializable {
                 List<Object> offers = (List<Object>) specialOffers.get("offers");
                 for (Object offer : offers) {
                     Map<String, Object> offerMap = ((Map<String, Object>) offer);
-                    Integer quantity = (Integer) offerMap.get("quantity");
-                    Integer offerUnitPrice = (Integer) offerMap.get("unitPrice");
-                    Integer freebieUnit = (Integer) offerMap.get("freebieUnit");
-                    Integer frequency = (Integer) offerMap.get("frequency");
-                    ItemType offerItemType = ItemType.forName((String) offerMap.get("itemType"));
-                    OfferType offerType = OfferType.forName((String) offerMap.get("offerType"));
+                    Integer quantity = offerMap.get("quantity") != null ? (Integer) offerMap.get("quantity") : null;
+                    Integer offerUnitPrice = offerMap.get("unitPrice") != null ? (Integer) offerMap.get("unitPrice") : null;
+                    Integer frequency = offerMap.get("frequency") != null ? (Integer) offerMap.get("frequency") : null;
+                    ItemType offerItemType = offerMap.get("itemType") != null ? (ItemType) offerMap.get("itemType") : null;
+                    OfferType offerType = offerMap.get("offerType") != null ? (OfferType) offerMap.get("offerType") : null;
+                    Integer freebieUnit = offerMap.get("freebieUnit") != null ? (Integer) offerMap.get("freebieUnit") : null;
                     newData.put(
                             itemType, new ItemPrice(unitPrice,
                                     new SpecialOffers.SpecialOffersBuilder()
@@ -37,4 +37,5 @@ public class Catalogue implements Serializable {
         return newData;
     }
 }
+
 

@@ -1,14 +1,14 @@
 package befaster.solutions.CHK;
 
 public class Offer {
-    private final int quantity;
+    private final Integer quantity;
     private final ItemType itemType;
-    private final int unitPrice;
+    private final Integer unitPrice;
     private final OfferType offerType;
-    private final int freebieUnit;
-    private final int frequency;
+    private final Integer freebieUnit;
+    private final Integer frequency;
 
-    public Offer(int quantity, ItemType itemType, int unitPrice, OfferType offerType) {
+    public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType) {
         this.quantity = quantity;
         this.itemType = itemType;
         this.unitPrice = unitPrice;
@@ -17,7 +17,7 @@ public class Offer {
         this.frequency = 0;
     }
 
-    public Offer(int quantity, ItemType itemType, int unitPrice, OfferType offerType, int freebieUnit) {
+    public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit) {
         this.quantity = quantity;
         this.itemType = itemType;
         this.unitPrice = unitPrice;
@@ -26,7 +26,7 @@ public class Offer {
         this.frequency = 0;
     }
 
-    public Offer(int quantity, ItemType itemType, int unitPrice, OfferType offerType, int freebieUnit, int frequency) {
+    public Offer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit, Integer frequency) {
         this.quantity = quantity;
         this.itemType = itemType;
         this.unitPrice = unitPrice;
@@ -60,3 +60,4 @@ public class Offer {
         return frequency;
     }
 }
+

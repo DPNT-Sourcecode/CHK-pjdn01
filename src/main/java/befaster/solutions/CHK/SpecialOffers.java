@@ -21,19 +21,19 @@ public class SpecialOffers {
     public static class SpecialOffersBuilder {
         protected final List<Offer> offers = new ArrayList<>();
 
-        public SpecialOffersBuilder withOffer(int quantity, ItemType itemType, int unitPrice, OfferType offerType) {
+        public SpecialOffersBuilder withOffer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType) {
             Offer offer = new Offer(quantity, itemType, unitPrice, offerType);
             this.offers.add(offer);
             return this;
         }
 
-        public SpecialOffersBuilder withOffer(int quantity, ItemType itemType, int unitPrice, OfferType offerType, int freebieUnit) {
+        public SpecialOffersBuilder withOffer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit) {
             Offer offer = new Offer(quantity, itemType, unitPrice, offerType, freebieUnit);
             this.offers.add(offer);
             return this;
         }
 
-        public SpecialOffersBuilder withOffer(int quantity, ItemType itemType, int unitPrice, OfferType offerType, int freebieUnit, int frequency) {
+        public SpecialOffersBuilder withOffer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit, Integer frequency) {
             Offer offer = new Offer(quantity, itemType, unitPrice, offerType, freebieUnit, frequency);
             this.offers.add(offer);
             return this;
@@ -47,3 +47,4 @@ public class SpecialOffers {
 
 
 }
+
