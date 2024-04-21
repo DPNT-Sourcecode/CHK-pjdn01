@@ -153,39 +153,6 @@
       ]
     }
   },
-  "P": {
-    "unitPrice": 50,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 5,
-          "itemType": "P",
-          "unitPrice": 200,
-          "offerType": "Discount"
-        }
-      ]
-    }
-  },
-  "R": {
-    "unitPrice": 50,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 3,
-          "itemType": "Q",
-          "unitPrice": 0,
-          "offerType": "Freebies",
-          "frequency": 4
-        }
-      ]
-    }
-  },
-  "S": {
-    "unitPrice": 30
-  },
-  "T": {
-    "unitPrice": 20
-  },
   "R": {
     "unitPrice": 50,
     "specialOffers": {
@@ -198,6 +165,12 @@
         }
       ]
     }
+  },
+  "S": {
+    "unitPrice": 30
+  },
+  "T": {
+    "unitPrice": 20
   },
   "U": {
     "unitPrice": 40,
@@ -245,3 +218,4 @@
     "unitPrice": 50
   }
 }
+
