@@ -72,11 +72,11 @@ public class CheckoutCalculator {
 
     }
 
-    private static int options(Map<String, Integer> itemToCountMap) {
+    private static int options(Map<ItemType, Integer> itemToCountMap) {
         // EEBB
         Map<ItemType, ItemCheckoutPrice> itemCheckoutPrice = new HashMap<>();
-        for (Map.Entry<String, Integer> item : itemToCountMap.entrySet()) {
-            itemCheckoutPrice.put(ItemType.forName(item.getKey()), calculateBestOfferPrice(item));
+        for (Map.Entry<ItemType, Integer> item : itemToCountMap.entrySet()) {
+            itemCheckoutPrice.put(item.getKey(), calculateBestOfferPrice(item));
         }
         Optional<Optional<Freebies>> hasFreebies = itemCheckoutPrice.values().stream()
                 .map(ItemCheckoutPrice::getFreebies)
@@ -84,20 +84,34 @@ public class CheckoutCalculator {
                 .map(Optional::of)
                 .findFirst()
                 .orElse(Optional.empty());
+
         if (hasFreebies.isEmpty()) {
-            return  Collections.sum
+            return itemCheckoutPrice.values().stream()
+                    .map(ItemCheckoutPrice::getPrice)
+                    .reduce(Integer::sum).orElse(-1);
+        } else {
+            Map<ItemType, ItemCheckoutPrice> itemCheckoutPriceWithFreebies = new HashMap<>();
+            for (Map.Entry<ItemType, ItemCheckoutPrice> item : itemCheckoutPrice.entrySet()) {
+                Optional<Freebies> optFreebie = item.getValue().getFreebies();
+                if (optFreebie.isPresent()) {
+                    Freebies freebie = optFreebie.get();
+                    Map.Entry<ItemType, ItemCheckoutPrice> val = new AbstractMap.SimpleEntry<>{freebie.getItemType(), itemToCountMap(freebie.getItemType())}
+                    itemCheckoutPriceWithFreebies.put(freebie.getItemType(), calculateBestOfferPrice())
+                }
+
+            }
         }
         return -1;
     }
 
-    private static ItemCheckoutPrice calculateBestOfferPrice(Map.Entry<String, Integer> item) {
+    private static ItemCheckoutPrice calculateBestOfferPrice(Map.Entry<ItemType, Integer> item) {
         return calculateBestOfferPrice(item, 0);
     }
 
-    private static ItemCheckoutPrice calculateBestOfferPrice(Map.Entry<String, Integer> item, int numberOfFreebies) {
+    private static ItemCheckoutPrice calculateBestOfferPrice(Map.Entry<ItemType, Integer> item, int numberOfFreebies) {
         Set<Integer> prices = new HashSet<>();
         AtomicReference<Freebies> freebies = new AtomicReference<>();
-        ItemType itemType = ItemType.forName(item.getKey());
+        ItemType itemType = item.getKey();
         ItemPrice itemPrice = ItemToPriceMap2.get(itemType);
         int quantity = item.getValue() - numberOfFreebies;
         if (itemPrice.getSpecialOffers().isPresent()) {
@@ -151,3 +165,4 @@ public class CheckoutCalculator {
     }
 
 }
+

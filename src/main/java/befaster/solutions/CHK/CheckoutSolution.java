@@ -11,15 +11,15 @@ public class CheckoutSolution {
         if (skus == null || skus.isEmpty()) {
             return 0;
         }
-        Map<String, Integer> itemToCountMap = getItemToCountMap(skus);
+        Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
-        return computeTotalCost(itemToCountMap);
+//        return computeTotalCost(itemToCountMap);
     }
 
-    private static Map<String, Integer> getItemToCountMap(String skus) {
-        Map<String, Integer> itemToCountMap = new HashMap<>();
+    private static Map<ItemType, Integer> getItemToCountMap(String skus) {
+        Map<ItemType, Integer> itemToCountMap = new HashMap<>();
         for (String str : skus.split("")) {
-            itemToCountMap.merge(str, 1, Integer::sum);
+            itemToCountMap.merge(ItemType.forName(str), 1, Integer::sum);
         }
         return itemToCountMap;
     }
@@ -50,3 +50,4 @@ public class CheckoutSolution {
         return totalCost;
     }
 }
+
