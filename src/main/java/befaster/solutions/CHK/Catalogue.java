@@ -1,6 +1,7 @@
 package befaster.solutions.CHK;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ public class Catalogue implements Serializable {
             Map<String, Object> specialOffers = ((Map<String, Object>) value.get("specialOffers"));
             if (specialOffers != null) {
                 List<Object> offers = (List<Object>) specialOffers.get("offers");
+                final List<Offer> offerList = new ArrayList<>();
                 for (Object offer : offers) {
                     Map<String, Object> offerMap = ((Map<String, Object>) offer);
                     Integer quantity = offerMap.get("quantity") != null ? (Integer) offerMap.get("quantity") : null;
@@ -23,13 +25,12 @@ public class Catalogue implements Serializable {
                     ItemType offerItemType = offerMap.get("itemType") != null ? ItemType.forName(((String) offerMap.get("itemType"))) : null;
                     OfferType offerType = offerMap.get("offerType") != null ? OfferType.forName(((String) offerMap.get("offerType"))) : null;
                     Integer freebieUnit = offerMap.get("freebieUnit") != null ? (Integer) offerMap.get("freebieUnit") : null;
-                    newData.put(
-                            itemType, new ItemPrice(unitPrice,
-                                    new SpecialOffers.SpecialOffersBuilder()
-                                            .withOffer(quantity, offerItemType, offerUnitPrice, offerType, freebieUnit, frequency)
-                                            .build())
+                    offerList.add(
+                            new Offer(quantity, offerItemType, offerUnitPrice, offerType, freebieUnit, frequency)
                     );
                 }
+                newData.put(itemType, new ItemPrice(unitPrice,
+                        new SpecialOffers.SpecialOffersBuilder().withOffers(offerList).build()) );
             } else {
                 newData.put(itemType, new ItemPrice(unitPrice));
             }
@@ -37,3 +38,4 @@ public class Catalogue implements Serializable {
         return newData;
     }
 }
+

@@ -11,7 +11,7 @@ public class SpecialOffers {
     }
 
     public SpecialOffers(SpecialOffersBuilder specialOffersBuilder) {
-        this.offers = specialOffersBuilder.offers;
+        this.offers = specialOffersBuilder.offerList;
     }
 
     public List<Offer> getOffers() {
@@ -19,23 +19,28 @@ public class SpecialOffers {
     }
 
     public static class SpecialOffersBuilder {
-        protected final List<Offer> offers = new ArrayList<>();
+        protected final List<Offer> offerList = new ArrayList<>();
+
+        public SpecialOffersBuilder withOffers(List<Offer> offers) {
+            this.offerList.addAll(offers);
+            return this;
+        }
 
         public SpecialOffersBuilder withOffer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType) {
             Offer offer = new Offer(quantity, itemType, unitPrice, offerType);
-            this.offers.add(offer);
+            this.offerList.add(offer);
             return this;
         }
 
         public SpecialOffersBuilder withOffer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit) {
             Offer offer = new Offer(quantity, itemType, unitPrice, offerType, freebieUnit);
-            this.offers.add(offer);
+            this.offerList.add(offer);
             return this;
         }
 
         public SpecialOffersBuilder withOffer(Integer quantity, ItemType itemType, Integer unitPrice, OfferType offerType, Integer freebieUnit, Integer frequency) {
             Offer offer = new Offer(quantity, itemType, unitPrice, offerType, freebieUnit, frequency);
-            this.offers.add(offer);
+            this.offerList.add(offer);
             return this;
         }
 
@@ -47,3 +52,4 @@ public class SpecialOffers {
 
 
 }
+
