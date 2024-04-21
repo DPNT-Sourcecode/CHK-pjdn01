@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum OfferType {
-    SINGLE("SINGLE"),
-    MULTIPLE("MULTIPLE"),
+    DISCOUNT("Discount"),
+    FREEBIES("Freebies"),
     UNKNOWN("UNKNOWN");
 
     private static final Map<String, OfferType> enums = new HashMap<>(5);
@@ -34,3 +34,4 @@ public enum OfferType {
         return this.type;
     }
 }
+
