@@ -1,4 +1,4 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model.enums;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,3 +35,4 @@ public enum OfferType {
         return this.type;
     }
 }
+

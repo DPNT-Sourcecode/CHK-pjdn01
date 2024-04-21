@@ -1,4 +1,4 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model;
 
 public class GroupMember {
     private final ItemPrice itemPrice;
@@ -17,3 +17,4 @@ public class GroupMember {
         return quantity;
     }
 }
+

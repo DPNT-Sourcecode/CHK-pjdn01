@@ -1,4 +1,7 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model;
+
+import befaster.solutions.CHK.model.enums.ItemType;
+import befaster.solutions.CHK.model.enums.OfferType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,3 +55,4 @@ public class SpecialOffers {
 
 
 }
+

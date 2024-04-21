@@ -1,4 +1,7 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model;
+
+import befaster.solutions.CHK.model.enums.ItemType;
+import befaster.solutions.CHK.model.enums.OfferType;
 
 public class Offer {
     private final Integer quantity;
@@ -79,3 +82,4 @@ public class Offer {
         return groupDiscountName;
     }
 }
+

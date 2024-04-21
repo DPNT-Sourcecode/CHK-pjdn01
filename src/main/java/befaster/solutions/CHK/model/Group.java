@@ -1,4 +1,6 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model;
+
+import befaster.solutions.CHK.model.enums.ItemType;
 
 import java.util.HashMap;
 
@@ -34,3 +36,4 @@ public class Group {
         return quantity;
     }
 }
+

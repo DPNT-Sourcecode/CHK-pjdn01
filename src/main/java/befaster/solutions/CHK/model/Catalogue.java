@@ -1,4 +1,7 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model;
+
+import befaster.solutions.CHK.model.enums.ItemType;
+import befaster.solutions.CHK.model.enums.OfferType;
 
 import java.io.Serializable;
 import java.util.*;
@@ -42,3 +45,4 @@ public class Catalogue implements Serializable {
 
     public static final List<ItemType> GROUPS = Arrays.asList(ItemType.GroupA);
 }
+

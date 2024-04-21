@@ -1,4 +1,4 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model;
 
 import java.util.List;
 
@@ -19,3 +19,4 @@ public class GroupDiscount {
         return unitPrice;
     }
 }
+

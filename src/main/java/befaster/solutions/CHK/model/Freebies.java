@@ -1,4 +1,6 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model;
+
+import befaster.solutions.CHK.model.enums.ItemType;
 
 public class Freebies {
     private final ItemType itemType;
@@ -17,3 +19,4 @@ public class Freebies {
         return numberOfItem;
     }
 }
+

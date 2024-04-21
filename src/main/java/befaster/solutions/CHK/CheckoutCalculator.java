@@ -1,10 +1,12 @@
 package befaster.solutions.CHK;
 
+import befaster.solutions.CHK.model.*;
+import befaster.solutions.CHK.model.enums.ItemType;
+import befaster.solutions.CHK.model.enums.OfferType;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
-
-import static befaster.solutions.CHK.Catalogue.GROUP_DISCOUNT_MAP;
 
 public class CheckoutCalculator {
     public static Integer calculateTotalCost(
@@ -42,7 +44,7 @@ public class CheckoutCalculator {
         }
 
         if (!groupMap.isEmpty()) {
-            totalGroupItemsCost = calculateBestGroupPrice(catalogue, groupMap);
+            totalGroupItemsCost = calculateBestGroupPrice(groupMap);
         }
         return totalNonGroupItemsCost + totalGroupItemsCost;
     }
@@ -125,59 +127,11 @@ public class CheckoutCalculator {
             OfferType offerType = offers.stream().iterator().next().getOfferType();
 
             if (offerType == OfferType.DISCOUNT) {
-
-                List<Integer> offerQuantities = offers.stream().map(Offer::getQuantity).toList();
-                int maxOfferQuantity = Collections.max(offerQuantities);
-                int totalOfferQuantity = offerQuantities.stream().reduce(Integer::sum).orElseThrow();
-
-                if (maxOfferQuantity > 0 && numberOfItems % maxOfferQuantity == 0) {
-                    int offerQuantityUnit = numberOfItems / maxOfferQuantity;
-                    Offer offer = offers.stream().filter(o -> o.getQuantity() == maxOfferQuantity).findFirst().orElseThrow();
-                    prices.add(offerQuantityUnit * offer.getUnitPrice());
-                } else if (totalOfferQuantity > 0 && totalOfferQuantity <= numberOfItems) {
-                    int offerQuantityUnit = numberOfItems / totalOfferQuantity;
-                    AtomicInteger totalCost = new AtomicInteger();
-                    offers.forEach(offer -> totalCost.addAndGet(offerQuantityUnit * offer.getUnitPrice()));
-                    int remainingNumberOfItems = numberOfItems - (totalOfferQuantity * offerQuantityUnit);
-                    totalCost.addAndGet(remainingNumberOfItems * itemPrice.getUnitPrice());
-                    prices.add(totalCost.get());
-                } else {
-                    offers.forEach(offer -> {
-                        int offerQuantityUnit = numberOfItems / offer.getQuantity();
-                        int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
-                        int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingNumberOfItems * itemPrice.getUnitPrice());
-                        prices.add(totalCost);
-                    });
-                }
+                addDiscountedPrice(offers, numberOfItems, prices, itemPrice);
             } else if (offerType == OfferType.FREEBIES) {
-
-                offers.forEach(offer -> {
-                    ItemType freebieItemType = offers.stream().iterator().next().getItemType();
-                    int offerQuantityUnit = numberOfItems / offer.getQuantity();
-
-                    if (freebieItemType != itemType) {
-                        int totalCost = (numberOfItems * itemPrice.getUnitPrice());
-                        prices.add(totalCost);
-                    } else {
-                        int remainingQuantity = numberOfItems < offer.getFrequency() ?
-                                numberOfItems : numberOfItems - (numberOfItems / offer.getFrequency());
-                        int totalCost = (remainingQuantity * itemPrice.getUnitPrice());
-                        prices.add(totalCost);
-                    }
-
-                    if (offer.getFrequency() == null && numberOfItems >= offer.getQuantity()) {
-                        freebies.set(new Freebies(offer.getItemType(), offerQuantityUnit));
-                    }
-                });
-            } else if (offerType == OfferType.GROUP_DISCOUNT) {
-                GroupDiscount groupDiscount = GROUP_DISCOUNT_MAP.get(
-                        offers.stream().iterator().next().getGroupDiscountName()
-                );
-                int discountQuantity = groupDiscount.getGroupQuantity();
-                int discountPrice = groupDiscount.getUnitPrice();
+                addFreebiesPrice(offers, numberOfItems, itemType, itemPrice, prices, freebies);
             }
         }
-// STXS
         int totalCost = (numberOfItems * itemPrice.getUnitPrice());
         prices.add(totalCost);
 
@@ -186,11 +140,57 @@ public class CheckoutCalculator {
         return new ItemCheckoutPrice(minPrice, freebies.get());
     }
 
-    private static int calculateBestGroupPrice(
-            Map<ItemType, ItemPrice> catalogue, Map<ItemType, Group> groupMap) {
+    private static void addFreebiesPrice(List<Offer> offers, int numberOfItems,
+                                         ItemType itemType, ItemPrice itemPrice,
+                                         Set<Integer> prices, AtomicReference<Freebies> freebies) {
+        offers.forEach(offer -> {
+            ItemType freebieItemType = offers.stream().iterator().next().getItemType();
+            int offerQuantityUnit = numberOfItems / offer.getQuantity();
+
+            if (freebieItemType != itemType) {
+                int totalCost = (numberOfItems * itemPrice.getUnitPrice());
+                prices.add(totalCost);
+            } else {
+                int remainingQuantity = numberOfItems < offer.getFrequency() ?
+                        numberOfItems : numberOfItems - (numberOfItems / offer.getFrequency());
+                int totalCost = (remainingQuantity * itemPrice.getUnitPrice());
+                prices.add(totalCost);
+            }
+
+            if (offer.getFrequency() == null && numberOfItems >= offer.getQuantity()) {
+                freebies.set(new Freebies(offer.getItemType(), offerQuantityUnit));
+            }
+        });
+    }
+
+    private static void addDiscountedPrice(List<Offer> offers, int numberOfItems, Set<Integer> prices, ItemPrice itemPrice) {
+        List<Integer> offerQuantities = offers.stream().map(Offer::getQuantity).toList();
+        int maxOfferQuantity = Collections.max(offerQuantities);
+        int totalOfferQuantity = offerQuantities.stream().reduce(Integer::sum).orElseThrow();
+
+        if (maxOfferQuantity > 0 && numberOfItems % maxOfferQuantity == 0) {
+            int offerQuantityUnit = numberOfItems / maxOfferQuantity;
+            Offer offer = offers.stream().filter(o -> o.getQuantity() == maxOfferQuantity).findFirst().orElseThrow();
+            prices.add(offerQuantityUnit * offer.getUnitPrice());
+        } else if (totalOfferQuantity > 0 && totalOfferQuantity <= numberOfItems) {
+            int offerQuantityUnit = numberOfItems / totalOfferQuantity;
+            AtomicInteger totalCost = new AtomicInteger();
+            offers.forEach(offer -> totalCost.addAndGet(offerQuantityUnit * offer.getUnitPrice()));
+            int remainingNumberOfItems = numberOfItems - (totalOfferQuantity * offerQuantityUnit);
+            totalCost.addAndGet(remainingNumberOfItems * itemPrice.getUnitPrice());
+            prices.add(totalCost.get());
+        } else {
+            offers.forEach(offer -> {
+                int offerQuantityUnit = numberOfItems / offer.getQuantity();
+                int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
+                int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingNumberOfItems * itemPrice.getUnitPrice());
+                prices.add(totalCost);
+            });
+        }
+    }
+
+    private static int calculateBestGroupPrice(Map<ItemType, Group> groupMap) {
         Set<Integer> prices = new HashSet<>();
-
-
         for (Map.Entry<ItemType, Group> entry : groupMap.entrySet()) {
             Map<ItemType, Integer> itemToQuantityMap = new HashMap<>();
             List<Integer> fullUnitPriceList = new ArrayList<>();
@@ -228,6 +228,7 @@ public class CheckoutCalculator {
     }
 
 }
+
 
 
 

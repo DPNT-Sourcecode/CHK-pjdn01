@@ -1,6 +1,5 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model;
 
-import java.util.List;
 import java.util.Optional;
 
 public class ItemCheckoutPrice {
@@ -25,3 +24,4 @@ public class ItemCheckoutPrice {
         return price;
     }
 }
+

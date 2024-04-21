@@ -1,4 +1,4 @@
-package befaster.solutions.CHK;
+package befaster.solutions.CHK.model;
 
 import java.util.Optional;
 
@@ -24,3 +24,4 @@ public class ItemPrice {
         return specialOffers != null ? Optional.of(specialOffers) : Optional.empty();
     }
 }
+
