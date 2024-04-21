@@ -82,4 +82,3 @@ public class Offer {
         return groupDiscountName;
     }
 }
-

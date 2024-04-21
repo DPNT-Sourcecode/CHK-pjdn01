@@ -223,13 +223,7 @@ public class CheckoutCalculator {
             prices.add(totalGroupCost + totalNonGroupCost);
         }
 
-        Integer minPrice = Collections.min(prices);
-        return minPrice;
+        return Collections.min(prices);
     }
 
 }
-
-
-
-
-

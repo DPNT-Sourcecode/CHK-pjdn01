@@ -19,4 +19,3 @@ public class GroupDiscount {
         return unitPrice;
     }
 }
-

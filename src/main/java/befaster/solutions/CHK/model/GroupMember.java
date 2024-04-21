@@ -17,4 +17,3 @@ public class GroupMember {
         return quantity;
     }
 }
-

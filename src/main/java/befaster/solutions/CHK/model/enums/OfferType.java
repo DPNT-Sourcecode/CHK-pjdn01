@@ -35,4 +35,3 @@ public enum OfferType {
         return this.type;
     }
 }
-

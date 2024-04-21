@@ -24,4 +24,3 @@ public class ItemCheckoutPrice {
         return price;
     }
 }
-

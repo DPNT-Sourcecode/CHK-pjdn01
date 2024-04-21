@@ -14,10 +14,10 @@ import static befaster.solutions.CHK.model.CheckoutUtils.*;
 public class CheckoutSolution {
 
 
-    public static void main(String[] args) {
-        Integer check = checkout("SXTYZ");
-        System.out.println(check);
-    }
+//    public static void main(String[] args) {
+//        Integer check = checkout("SXTYZ");
+//        System.out.println(check);
+//    }
 
     public static Integer checkout(String skus) {
         try {
@@ -30,12 +30,10 @@ public class CheckoutSolution {
             Map<ItemType, ItemPrice> catalogue = buildCatalogue(data);
             Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus, catalogue, false);
             Map<ItemType, Group> groupMap = buildGroup(skus, catalogue);
-            Integer totalCost = calculateTotalCost(itemToCountMap, groupMap, catalogue);
-            return totalCost;
+            return calculateTotalCost(itemToCountMap, groupMap, catalogue);
         } catch (Exception e) {
             System.out.println("Error occurred loading catalogue data");
             return -1;
         }
     }
 }
-
