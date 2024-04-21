@@ -13,12 +13,12 @@ public class Catalogue implements Serializable {
             ItemType itemType = ItemType.forName((String) item.getKey());
             Map<String, Object> value = (Map<String, Object>) item.getValue();
             Integer unitPrice = (Integer) value.get("unitPrice");
-            Map<String, Object> specialOffers = ((Map<String, Object>) value.get("specialOffers"));
+            Map<String, Object> specialOffers = (Map<String, Object>) value.get("specialOffers");
             if (specialOffers != null) {
                 List<Object> offers = (List<Object>) specialOffers.get("offers");
                 final List<Offer> offerList = new ArrayList<>();
                 for (Object offer : offers) {
-                    Map<String, Object> offerMap = ((Map<String, Object>) offer);
+                    Map<String, Object> offerMap = (Map<String, Object>) offer;
                     Integer quantity = offerMap.get("quantity") != null ? (Integer) offerMap.get("quantity") : null;
                     Integer offerUnitPrice = offerMap.get("unitPrice") != null ? (Integer) offerMap.get("unitPrice") : null;
                     Integer frequency = offerMap.get("frequency") != null ? (Integer) offerMap.get("frequency") : null;
@@ -38,4 +38,5 @@ public class Catalogue implements Serializable {
         return newData;
     }
 }
+
 
