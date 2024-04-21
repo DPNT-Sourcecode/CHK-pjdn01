@@ -204,7 +204,9 @@ public class CheckoutCalculator {
             int numberOfItems = itemToQuantityMap.values().stream()
                     .reduce(Integer::sum).orElseThrow();
             int quantityUnit = numberOfItems / group.getQuantity();
-            
+            int remainingQuantity = numberOfItems - (quantityUnit * group.getQuantity());
+            System.out.println(remainingQuantity);
+
 //            group.getValue().getMembers().entrySet();
 //                    .stream()
 //                    .map(entryMap -> {
@@ -238,3 +240,4 @@ public class CheckoutCalculator {
     }
 
 }
+
