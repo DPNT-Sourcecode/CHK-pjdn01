@@ -113,8 +113,8 @@ public class CheckoutCalculator {
                 List<Integer> offerQuantities = offers.stream().map(Offer::getQuantity).toList();
                 int maxOfferQuantity = Collections.max(offerQuantities);
                 int totalOfferQuantity = offerQuantities.stream().reduce(Integer::sum).orElseThrow();
-                if (maxOfferQuantity > 0 && maxOfferQuantity % numberOfItems == 0) {
-                    int offerQuantityUnit = numberOfItems / totalOfferQuantity;
+                if (maxOfferQuantity > 0 && numberOfItems % maxOfferQuantity  == 0) {
+                    int offerQuantityUnit = numberOfItems / maxOfferQuantity;
                     Offer offer = offers.stream().filter(o -> o.getQuantity() == maxOfferQuantity).findFirst().orElseThrow();
                     prices.add(offerQuantityUnit * offer.getUnitPrice());
                 } else if (maxOfferQuantity > 0 && totalOfferQuantity <= numberOfItems) {
@@ -159,4 +159,5 @@ public class CheckoutCalculator {
     }
 
 }
+
 
