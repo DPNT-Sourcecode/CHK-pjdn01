@@ -12,4 +12,3 @@ public class CheckoutUtils {
                     ItemType.D, new ItemPrice(15)
             );
 }
-

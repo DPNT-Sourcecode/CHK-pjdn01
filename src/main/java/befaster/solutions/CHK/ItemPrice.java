@@ -31,4 +31,3 @@ public class ItemPrice {
         return specialOfferQuantity != null ? Optional.of(specialOfferQuantity) : Optional.empty();
     }
 }
-
