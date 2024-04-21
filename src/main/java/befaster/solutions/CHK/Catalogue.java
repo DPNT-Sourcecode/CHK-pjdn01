@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.Map;
 
 public class Catalogue implements Serializable {
-    Map<Object, Object>  catalogue;
+    Map<ItemType, ItemPrice>  catalogue;
 
-    public Map<Object, Object> getCatalogue() {
-        return catalogue;
-    }
+//    private static Map<ItemType, ItemPrice> buildCatalogue(Map<Object, Object> data){
+//        for (Map.Entry<Object, Object> item : data.entrySet()) {
+//
+//        }
+//    }
 }
+
 

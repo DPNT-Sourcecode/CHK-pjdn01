@@ -31,7 +31,7 @@ public class CheckoutSolution {
 //        Map<Object, Object> myObj =gson.fromJson()
 
             ObjectMapper mapper = new ObjectMapper();
-            Map<Object, Object> myObj = mapper.readValue(new FileReader(filename), Map.class);
+            Map<String, Object> myObj = mapper.readValue(new FileReader(filename), Map.class);
 
             Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
@@ -52,4 +52,5 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
 
