@@ -38,5 +38,3 @@ public class Catalogue implements Serializable {
         return newData;
     }
 }
-
-
