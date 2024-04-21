@@ -2,10 +2,11 @@ package befaster.solutions.CHK;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ItemType {
+public enum ItemType implements Serializable {
     A("A"),
     B("B"),
     C("C"),
@@ -42,4 +43,5 @@ public enum ItemType {
         return this.type;
     }
 }
+
 
