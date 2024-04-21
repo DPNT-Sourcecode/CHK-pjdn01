@@ -151,7 +151,7 @@ public class CheckoutCalculator {
                         prices.add(totalCost);
                     }
 
-                    if (offer.getFrequency() == 0 && numberOfItems >= offer.getQuantity()) {
+                    if (offer.getFrequency() == null && numberOfItems >= offer.getQuantity()) {
                         freebies.set(new Freebies(offer.getItemType(), offerQuantityUnit));
                     }
                 });
@@ -167,4 +167,3 @@ public class CheckoutCalculator {
     }
 
 }
-

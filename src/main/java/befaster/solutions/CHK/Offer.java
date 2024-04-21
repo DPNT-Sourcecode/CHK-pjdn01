@@ -36,7 +36,7 @@ public class Offer {
     }
 
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
@@ -44,7 +44,7 @@ public class Offer {
         return itemType;
     }
 
-    public int getUnitPrice() {
+    public Integer getUnitPrice() {
         return unitPrice;
     }
 
@@ -52,12 +52,11 @@ public class Offer {
         return offerType;
     }
 
-    public int getFreebieUnit() {
+    public Integer getFreebieUnit() {
         return freebieUnit;
     }
 
-    public int getFrequency() {
+    public Integer getFrequency() {
         return frequency;
     }
 }
-
