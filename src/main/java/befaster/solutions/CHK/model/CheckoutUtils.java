@@ -4,6 +4,7 @@ import befaster.solutions.CHK.model.enums.ItemType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static befaster.solutions.CHK.model.Catalogue.GROUPS;
 import static befaster.solutions.CHK.model.Catalogue.GROUP_DISCOUNT_MAP;
@@ -40,15 +41,18 @@ public class CheckoutUtils {
             Map<ItemType, GroupMember> members = new HashMap<>();
             for (ItemType itemType : groupItems.keySet()) {
                 ItemPrice itemPrice = catalogue.get(itemType);
-                Offer offer = itemPrice.getSpecialOffers().orElseThrow().getOffers().iterator().next();
-                if (offer.getGroupDiscountName() == groupName) {
-                    Group group = groupMap.get(itemType);
-                    if (group == null) {
-                        members.put(itemType, new GroupMember(catalogue.get(itemType), groupItems.get(itemType)));
-                        GroupDiscount discount = GROUP_DISCOUNT_MAP.get(groupName);
-                        groupMap.put(groupName, new Group(discount.getUnitPrice(), discount.getGroupQuantity(), members));
-                    } else {
-                        group.addGroupMember(itemType, new GroupMember(catalogue.get(itemType), groupItems.get(itemType)));
+                Optional<SpecialOffers> specialOffers = itemPrice.getSpecialOffers();
+                if (specialOffers.isPresent()) {
+                    Offer offer = specialOffers.get().getOffers().iterator().next();
+                    if (offer.getGroupDiscountName() == groupName) {
+                        Group group = groupMap.get(itemType);
+                        if (group == null) {
+                            members.put(itemType, new GroupMember(catalogue.get(itemType), groupItems.get(itemType)));
+                            GroupDiscount discount = GROUP_DISCOUNT_MAP.get(groupName);
+                            groupMap.put(groupName, new Group(discount.getUnitPrice(), discount.getGroupQuantity(), members));
+                        } else {
+                            group.addGroupMember(itemType, new GroupMember(catalogue.get(itemType), groupItems.get(itemType)));
+                        }
                     }
                 }
             }
@@ -56,3 +60,4 @@ public class CheckoutUtils {
         return groupMap;
     }
 }
+
