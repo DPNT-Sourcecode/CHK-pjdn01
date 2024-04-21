@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import static befaster.solutions.CHK.Catalogue.buildCatalogue;
 import static befaster.solutions.CHK.CheckoutCalculator.calculateTotalCost;
 
 public class CheckoutSolution {
@@ -31,8 +32,8 @@ public class CheckoutSolution {
 //        Map<Object, Object> myObj =gson.fromJson()
 
             ObjectMapper mapper = new ObjectMapper();
-            Map<String, Object> myObj = mapper.readValue(new FileReader(filename), Map.class);
-
+            Map<Object, Object> myObj = mapper.readValue(new FileReader(filename), Map.class);
+            Map<ItemType, ItemPrice> priceMap = buildCatalogue(myObj);
             Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
             Integer totalCost = calculateTotalCost(itemToCountMap);
@@ -52,5 +53,6 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
 
 
