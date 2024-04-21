@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -23,12 +24,14 @@ public class CheckoutSolution {
             return 0;
         }
 
+        String filename = ""
+
         try {
             //        Gson gson = new Gson();
 //        Map<Object, Object> myObj =gson.fromJson()
 
             ObjectMapper mapper = new ObjectMapper();
-            Map<Object, Object> myObj = mapper.readValue(new File("/itemCatalogue.json"), Map.class);
+            Map<Object, Object> myObj = mapper.readValue(new FileReader("itemCatalogue.json"), Map.class);
 
             Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
@@ -49,6 +52,7 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
 
 
 
