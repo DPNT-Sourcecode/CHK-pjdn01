@@ -16,7 +16,7 @@ public class CheckoutSolution {
     private static final String filename = "D:\\akahuc\\Documents\\runner-for-java-windows\\accelerate_runner\\src\\main\\java\\befaster\\solutions\\CHK\\itemCatalogue.json";
 
     public static void main(String[] args) {
-        Integer check = checkout("SS");
+        Integer check = checkout("STXS");
         System.out.println(check);
     }
 
@@ -84,4 +84,5 @@ public class CheckoutSolution {
         return groupMap;
     }
 }
+
 

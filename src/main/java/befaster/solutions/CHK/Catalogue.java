@@ -36,11 +36,12 @@ public class Catalogue implements Serializable {
         return newData;
     }
 
-    public static final Map<String, GroupDiscount> GROUP_DISCOUNT_MAP = Map.of(
-            "GroupA", new GroupDiscount(3, 45)
+    public static final Map<ItemType, GroupDiscount> GROUP_DISCOUNT_MAP = Map.of(
+            ItemType.GroupA, new GroupDiscount(3, 45)
     );
 
     public static final List<ItemType> GROUPS = Arrays.asList(ItemType.GroupA);
 }
+
 
 
