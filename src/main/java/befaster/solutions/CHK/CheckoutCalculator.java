@@ -108,6 +108,8 @@ public class CheckoutCalculator {
             List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
             long offerItemTypes = offers.stream().map(Offer::getItemType).distinct().count();
             if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
+                int totalOfferQuantity = offers.stream().map(Offer::getQuantity).reduce(Integer::sum).orElse(0);
+                if( totalOfferQuantity > 0 && totalOfferQuantity < )
                 offers.forEach(offer -> {
                     int offerQuantityUnit = numberOfItems / offer.getQuantity();
                     int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
@@ -116,13 +118,12 @@ public class CheckoutCalculator {
                 });
             } else if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() != itemType) {
                 offers.forEach(offer -> {
-                    int offerPrice = offer.getUnitPrice();
                     int offerQuantityUnit = numberOfItems / offer.getQuantity();
-                    if (offerPrice == 0) {
+                    if (offer.getUnitPrice() == 0) {
                         int totalCost = (item.getValue() * itemPrice.getUnitPrice());
                         prices.add(totalCost);
                     } else {
-                        int remainingQuantity = item.getValue() - (offerQuantityUnit * numberOfItems);
+                        int remainingQuantity = numberOfItems - (offerQuantityUnit * offer.getQuantity());
                         int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingQuantity * itemPrice.getUnitPrice());
                         prices.add(totalCost);
                     }
@@ -176,4 +177,5 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
