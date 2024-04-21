@@ -60,9 +60,7 @@ public class CheckoutCalculator {
         Optional<Optional<Freebies>> hasFreebies = itemCheckoutPrice.values().stream()
                 .map(ItemCheckoutPrice::getFreebies)
                 .filter(Objects::nonNull)
-                .map(Optional::of)
-                .findFirst()
-                .orElse(Optional.empty());
+                .findFirst();
 
         if (hasFreebies.isEmpty()) {
             return getSum(itemCheckoutPrice);
@@ -152,6 +150,7 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
 
 
