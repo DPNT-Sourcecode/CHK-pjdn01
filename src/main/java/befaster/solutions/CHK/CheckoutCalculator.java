@@ -133,46 +133,27 @@ public class CheckoutCalculator {
                         prices.add(totalCost);
                     });
                 }
-            }
-
-//            else if (offerType == OfferType.FREEBIES) {
-//                offers.forEach(offer -> {
-//                    ItemType freebieItemType = offers.stream().iterator().next().getItemType();
-//                    int offerQuantityUnit = numberOfItems / offer.getQuantity();
-//                    if (freebieItemType != itemType) {
-//                        int totalCost = (numberOfItems * itemPrice.getUnitPrice());
-//                        prices.add(totalCost);
-//                    } else {
-//                        int freeItem = numberOfItems / offer.getFrequency();
-//                        int remainingQuantity = numberOfItems - freeItem;
-//                        int totalCost = (remainingQuantity * itemPrice.getUnitPrice());
-//                        prices.add(totalCost);
-//                    }
-//
-//                    if (offer.getFreebieUnit() > 0 && offer.getFrequency() == 0 && numberOfItems >= offer.getQuantity()) {
-//                        freebies.set(new Freebies(offer.getItemType(), offer.getFreebieUnit() * offerQuantityUnit));
-//                    }
-//                });
-//            }
-//        }
-
-            else if (offers.stream().iterator().next().getOfferType() == OfferType.FREEBIES) {
+            } else if (offerType == OfferType.FREEBIES) {
                 offers.forEach(offer -> {
+                    ItemType freebieItemType = offers.stream().iterator().next().getItemType();
                     int offerQuantityUnit = numberOfItems / offer.getQuantity();
-                    if (offer.getUnitPrice() == 0) {
+                    if (freebieItemType != itemType) {
                         int totalCost = (numberOfItems * itemPrice.getUnitPrice());
                         prices.add(totalCost);
                     } else {
-                        int remainingQuantity = numberOfItems - (offerQuantityUnit * offer.getQuantity());
-                        int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingQuantity * itemPrice.getUnitPrice());
+                        int freeItem = numberOfItems / offer.getFrequency();
+                        int remainingQuantity = numberOfItems - freeItem;
+                        int totalCost = (remainingQuantity * itemPrice.getUnitPrice());
                         prices.add(totalCost);
                     }
-                    if (offer.getFreebieUnit() > 0 && offer.getFrequency() == 0 && numberOfItems >= offer.getQuantity()) {
+
+                    if (offer.getFreebieUnit() > 0 && numberOfItems >= offer.getQuantity()) {
                         freebies.set(new Freebies(offer.getItemType(), offer.getFreebieUnit() * offerQuantityUnit));
                     }
                 });
             }
         }
+
         int totalCost = (numberOfItems * itemPrice.getUnitPrice());
         prices.add(totalCost);
 
@@ -182,4 +163,5 @@ public class CheckoutCalculator {
     }
 
 }
+
 

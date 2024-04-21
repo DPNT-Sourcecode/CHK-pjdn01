@@ -8,7 +8,7 @@ import static befaster.solutions.CHK.CheckoutCalculator.calculateTotalCost;
 public class CheckoutSolution {
 
     public static void main(String[] args) {
-        Integer check = checkout("FFABCDECBAABCABBAAAEEAAFF");
+        Integer check = checkout("BEBEEE");
         System.out.println(check);
     }
     public static Integer checkout(String skus) {
@@ -29,4 +29,5 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
 
