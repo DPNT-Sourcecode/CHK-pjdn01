@@ -42,7 +42,7 @@ public class CheckoutCalculator {
         }
 
         if (!groupMap.isEmpty()) {
-            totalGroupItemsCost = calculateBestGroupPrice(catalogue,groupMap);
+            totalGroupItemsCost = calculateBestGroupPrice(catalogue, groupMap);
         }
         return totalNonGroupItemsCost + totalGroupItemsCost;
     }
@@ -189,6 +189,29 @@ public class CheckoutCalculator {
     private static int calculateBestGroupPrice(
             Map<ItemType, ItemPrice> catalogue, Map<ItemType, Group> groupMap) {
         Set<Integer> prices = new HashSet<>();
+
+
+        for (Map.Entry<ItemType, Group> entry : groupMap.entrySet()) {
+            Map<ItemType, Integer> itemToUnitPriceMap = new HashMap<>();
+            Map<ItemType, Integer> itemToQuantityMap = new HashMap<>();
+            Group group = entry.getValue();
+            for (Map.Entry<ItemType, GroupMember> members : group.getMembers().entrySet()) {
+                ItemType itemType = members.getKey();
+                GroupMember member = members.getValue();
+                itemToUnitPriceMap.put(itemType, member.getItemPrice().getUnitPrice());
+                itemToQuantityMap.put(itemType, member.getQuantity());
+            }
+            int numberOfItems = itemToQuantityMap.values().stream()
+                    .reduce(Integer::sum).orElseThrow();
+            int quantityUnit = numberOfItems / group.getQuantity();
+            
+//            group.getValue().getMembers().entrySet();
+//                    .stream()
+//                    .map(entryMap -> {
+//                        ItemType itemType = entryMap.getKey();
+//                        entryMap.getValue()
+//                    })
+        }
         AtomicReference<Freebies> freebies = new AtomicReference<>();
 //        ItemType itemType = item.getKey();
 //        ItemPrice itemPrice = catalogue.get(itemType);
@@ -215,4 +238,3 @@ public class CheckoutCalculator {
     }
 
 }
-
