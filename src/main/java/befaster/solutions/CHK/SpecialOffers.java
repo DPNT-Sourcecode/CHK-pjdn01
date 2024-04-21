@@ -13,5 +13,11 @@ public class SpecialOffers {
         return offers;
     }
 
-    
+    public SpecialOffers withOffer(int quantity, ItemType itemType, int unitPrice, OfferType offerType) {
+        Offer offer = new Offer(quantity, itemType, unitPrice, offerType);
+        offers.add(offer);
+        return this;
+    }
+
 }
+
