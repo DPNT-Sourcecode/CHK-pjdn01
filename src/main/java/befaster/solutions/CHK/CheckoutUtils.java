@@ -27,6 +27,37 @@ public class CheckoutUtils {
                             new SpecialOffers.SpecialOffersBuilder()
                                     .withOffer(2, ItemType.F, 0, OfferType.FREEBIES, 1, 3)
                                     .build()
-                    )
+                    ),
+                    ItemType.F, new ItemPrice(10,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(2, ItemType.F, 0, OfferType.FREEBIES, 1, 3)
+                                    .build()
+                    ),
+                    ItemType.F, new ItemPrice(10,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(2, ItemType.F, 0, OfferType.FREEBIES, 1, 3)
+                                    .build()
+                    ),
+                    ItemType.F, new ItemPrice(10,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(2, ItemType.F, 0, OfferType.FREEBIES, 1, 3)
+                                    .build()
+                    ),
+                    ItemType.F, new ItemPrice(10,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(2, ItemType.F, 0, OfferType.FREEBIES, 1, 3)
+                                    .build()
+                    ),
+                    ItemType.F, new ItemPrice(10,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(2, ItemType.F, 0, OfferType.FREEBIES, 1, 3)
+                                    .build()
+                    ),
+                    ItemType.F, new ItemPrice(10,
+                            new SpecialOffers.SpecialOffersBuilder()
+                                    .withOffer(2, ItemType.F, 0, OfferType.FREEBIES, 1, 3)
+                                    .build()
+                    ),
             );
 }
+
