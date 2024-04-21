@@ -1,241 +1,243 @@
 {
-  "A": {
-    "unitPrice": 50,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 3,
-          "itemType": "A",
-          "unitPrice": 130,
-          "offerType": "Discount"
-        },
-        {
-          "quantity": 5,
-          "itemType": "A",
-          "unitPrice": 200,
-          "offerType": "Discount"
-        }
-      ]
+  "catalogue": {
+    "A": {
+      "unitPrice": 50,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 3,
+            "itemType": "A",
+            "unitPrice": 130,
+            "offerType": "Discount"
+          },
+          {
+            "quantity": 5,
+            "itemType": "A",
+            "unitPrice": 200,
+            "offerType": "Discount"
+          }
+        ]
+      }
+    },
+    "B": {
+      "unitPrice": 30,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 2,
+            "itemType": "F",
+            "unitPrice": 45,
+            "offerType": "Discount"
+          }
+        ]
+      }
+    },
+    "C": {
+      "unitPrice": 20
+    },
+    "D": {
+      "unitPrice": 15
+    },
+    "E": {
+      "unitPrice": 40,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 2,
+            "itemType": "B",
+            "unitPrice": 0,
+            "offerType": "Freebies"
+          }
+        ]
+      }
+    },
+    "F": {
+      "unitPrice": 10,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 2,
+            "itemType": "F",
+            "unitPrice": 0,
+            "offerType": "Freebies",
+            "frequency": 3
+          }
+        ]
+      }
+    },
+    "G": {
+      "unitPrice": 20
+    },
+    "H": {
+      "unitPrice": 10,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 5,
+            "itemType": "H",
+            "unitPrice": 45,
+            "offerType": "Discount"
+          }
+        ]
+      }
+    },
+    "I": {
+      "unitPrice": 35
+    },
+    "J": {
+      "unitPrice": 60
+    },
+    "K": {
+      "unitPrice": 80,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 2,
+            "itemType": "F",
+            "unitPrice": 150,
+            "offerType": "Discount"
+          }
+        ]
+      }
+    },
+    "L": {
+      "unitPrice": 90
+    },
+    "M": {
+      "unitPrice": 15
+    },
+    "N": {
+      "unitPrice": 40,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 3,
+            "itemType": "M",
+            "unitPrice": 0,
+            "offerType": "Freebies"
+          }
+        ]
+      }
+    },
+    "0": {
+      "unitPrice": 10
+    },
+    "P": {
+      "unitPrice": 50,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 5,
+            "itemType": "P",
+            "unitPrice": 200,
+            "offerType": "Discount"
+          }
+        ]
+      }
+    },
+    "Q": {
+      "unitPrice": 30,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 3,
+            "itemType": "Q",
+            "unitPrice": 80,
+            "offerType": "Discount"
+          }
+        ]
+      }
+    },
+    "P": {
+      "unitPrice": 50,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 5,
+            "itemType": "P",
+            "unitPrice": 200,
+            "offerType": "Discount"
+          }
+        ]
+      }
+    },
+    "R": {
+      "unitPrice": 50,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 3,
+            "itemType": "Q",
+            "unitPrice": 0,
+            "offerType": "Freebies",
+            "frequency": 4
+          }
+        ]
+      }
+    },
+    "S": {
+      "unitPrice": 30
+    },
+    "T": {
+      "unitPrice": 20
+    },
+    "R": {
+      "unitPrice": 50,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 3,
+            "itemType": "Q",
+            "unitPrice": 0,
+            "offerType": "Freebies"
+          }
+        ]
+      }
+    },
+    "U": {
+      "unitPrice": 40,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 3,
+            "itemType": "U",
+            "unitPrice": 0,
+            "offerType": "Freebies",
+            "frequency": 4
+          }
+        ]
+      }
+    },
+    "V": {
+      "unitPrice": 50,
+      "specialOffers": {
+        "offers": [
+          {
+            "quantity": 2,
+            "itemType": "V",
+            "unitPrice": 90,
+            "offerType": "Discount"
+          },
+          {
+            "quantity": 3,
+            "itemType": "V",
+            "unitPrice": 130,
+            "offerType": "Discount"
+          }
+        ]
+      }
+    },
+    "W": {
+      "unitPrice": 20
+    },
+    "X": {
+      "unitPrice": 90
+    },
+    "Y": {
+      "unitPrice": 10
+    },
+    "Z": {
+      "unitPrice": 50
     }
-  },
-  "B": {
-    "unitPrice": 30,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 2,
-          "itemType": "F",
-          "unitPrice": 45,
-          "offerType": "Discount"
-        }
-      ]
-    }
-  },
-  "C": {
-    "unitPrice": 20
-  },
-  "D": {
-    "unitPrice": 15
-  },
-  "E": {
-    "unitPrice": 40,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 2,
-          "itemType": "B",
-          "unitPrice": 0,
-          "offerType": "Freebies"
-        }
-      ]
-    }
-  },
-  "F": {
-    "unitPrice": 10,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 2,
-          "itemType": "F",
-          "unitPrice": 0,
-          "offerType": "Freebies",
-          "frequency": 3
-        }
-      ]
-    }
-  },
-  "G": {
-    "unitPrice": 20
-  },
-  "H": {
-    "unitPrice": 10,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 5,
-          "itemType": "H",
-          "unitPrice": 45,
-          "offerType": "Discount"
-        }
-      ]
-    }
-  },
-  "I": {
-    "unitPrice": 35
-  },
-  "J": {
-    "unitPrice": 60
-  },
-  "K": {
-    "unitPrice": 80,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 2,
-          "itemType": "F",
-          "unitPrice": 150,
-          "offerType": "Discount"
-        }
-      ]
-    }
-  },
-  "L": {
-    "unitPrice": 90
-  },
-  "M": {
-    "unitPrice": 15
-  },
-  "N": {
-    "unitPrice": 40,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 3,
-          "itemType": "M",
-          "unitPrice": 0,
-          "offerType": "Freebies"
-        }
-      ]
-    }
-  },
-  "0": {
-    "unitPrice": 10
-  },
-  "P": {
-    "unitPrice": 50,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 5,
-          "itemType": "P",
-          "unitPrice": 200,
-          "offerType": "Discount"
-        }
-      ]
-    }
-  },
-  "Q": {
-    "unitPrice": 30,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 3,
-          "itemType": "Q",
-          "unitPrice": 80,
-          "offerType": "Discount"
-        }
-      ]
-    }
-  },
-  "P": {
-    "unitPrice": 50,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 5,
-          "itemType": "P",
-          "unitPrice": 200,
-          "offerType": "Discount"
-        }
-      ]
-    }
-  },
-  "R": {
-    "unitPrice": 50,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 3,
-          "itemType": "Q",
-          "unitPrice": 0,
-          "offerType": "Freebies",
-          "frequency": 4
-        }
-      ]
-    }
-  },
-  "S": {
-    "unitPrice": 30
-  },
-  "T": {
-    "unitPrice": 20
-  },
-  "R": {
-    "unitPrice": 50,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 3,
-          "itemType": "Q",
-          "unitPrice": 0,
-          "offerType": "Freebies"
-        }
-      ]
-    }
-  },
-  "U": {
-    "unitPrice": 40,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 3,
-          "itemType": "U",
-          "unitPrice": 0,
-          "offerType": "Freebies",
-          "frequency": 4
-        }
-      ]
-    }
-  },
-  "V": {
-    "unitPrice": 50,
-    "specialOffers": {
-      "offers": [
-        {
-          "quantity": 2,
-          "itemType": "V",
-          "unitPrice": 90,
-          "offerType": "Discount"
-        },
-        {
-          "quantity": 3,
-          "itemType": "V",
-          "unitPrice": 130,
-          "offerType": "Discount"
-        }
-      ]
-    }
-  },
-  "W": {
-    "unitPrice": 20
-  },
-  "X": {
-    "unitPrice": 90
-  },
-  "Y": {
-    "unitPrice": 10
-  },
-  "Z": {
-    "unitPrice": 50
   }
 }
