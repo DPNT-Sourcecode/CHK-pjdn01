@@ -7,31 +7,44 @@ import java.util.concurrent.atomic.AtomicReference;
 import static befaster.solutions.CHK.Catalogue.GROUP_DISCOUNT_MAP;
 
 public class CheckoutCalculator {
-    public static Integer calculateTotalCost(Map<ItemType, Integer> itemToCountMap, Map<ItemType, Group> groupMap, Map<ItemType, ItemPrice> catalogue) {
+    public static Integer calculateTotalCost(
+            Map<ItemType, Integer> itemToCountMap,
+            Map<ItemType, Group> groupMap,
+            Map<ItemType, ItemPrice> catalogue) {
 
-        Optional<ItemType> hasUnknownItem = itemToCountMap.keySet().stream()
-                .filter(type -> type == ItemType.UNKNOWN)
-                .map(Optional::of)
-                .findFirst()
-                .orElse(Optional.empty());
+        int totalNonGroupItemsCost = 0;
+        int totalGroupItemsCost = 0;
+        if (!itemToCountMap.isEmpty()) {
+            Optional<ItemType> hasUnknownItem = itemToCountMap.keySet().stream()
+                    .filter(type -> type == ItemType.UNKNOWN)
+                    .map(Optional::of)
+                    .findFirst()
+                    .orElse(Optional.empty());
 
-        if (hasUnknownItem.isPresent()) {
-            return -1;
+            if (hasUnknownItem.isPresent()) {
+                return -1;
+            }
+
+            Optional<Optional<SpecialOffers>> hasSpecialOffers = itemToCountMap.keySet().stream()
+                    .filter(type -> type != ItemType.UNKNOWN)
+                    .map(catalogue::get)
+                    .map(ItemPrice::getSpecialOffers)
+                    .filter(Objects::nonNull)
+                    .map(Optional::of)
+                    .findFirst()
+                    .orElse(Optional.empty());
+
+            if (hasSpecialOffers.isEmpty()) {
+                totalNonGroupItemsCost = simpleCheckoutCal(itemToCountMap, catalogue);
+            } else {
+                totalNonGroupItemsCost = complexCheckoutCal(itemToCountMap, catalogue);
+            }
         }
 
-        Optional<Optional<SpecialOffers>> hasSpecialOffers = itemToCountMap.keySet().stream()
-                .filter(type -> type != ItemType.UNKNOWN)
-                .map(catalogue::get)
-                .map(ItemPrice::getSpecialOffers)
-                .filter(Objects::nonNull)
-                .map(Optional::of)
-                .findFirst()
-                .orElse(Optional.empty());
-
-        if (hasSpecialOffers.isEmpty()) {
-            return simpleCheckoutCal(itemToCountMap, catalogue);
+        if (!groupMap.isEmpty()) {
+            totalGroupItemsCost = calculateBestGroupPrice(catalogue,groupMap);
         }
-        return complexCheckoutCal(itemToCountMap, catalogue);
+        return totalNonGroupItemsCost + totalGroupItemsCost;
     }
 
     private static int simpleCheckoutCal(Map<ItemType, Integer> itemToCountMap, Map<ItemType, ItemPrice> catalogue) {
@@ -89,7 +102,6 @@ public class CheckoutCalculator {
     }
 
 
-
     private static Integer getSum(Map<ItemType, ItemCheckoutPrice> itemCheckoutPrice) {
         return itemCheckoutPrice.values().stream()
                 .map(ItemCheckoutPrice::getPrice)
@@ -137,8 +149,7 @@ public class CheckoutCalculator {
                         prices.add(totalCost);
                     });
                 }
-            }
-            else if (offerType == OfferType.FREEBIES) {
+            } else if (offerType == OfferType.FREEBIES) {
 
                 offers.forEach(offer -> {
                     ItemType freebieItemType = offers.stream().iterator().next().getItemType();
@@ -158,8 +169,7 @@ public class CheckoutCalculator {
                         freebies.set(new Freebies(offer.getItemType(), offerQuantityUnit));
                     }
                 });
-            }
-            else if (offerType == OfferType.GROUP_DISCOUNT) {
+            } else if (offerType == OfferType.GROUP_DISCOUNT) {
                 GroupDiscount groupDiscount = GROUP_DISCOUNT_MAP.get(
                         offers.stream().iterator().next().getGroupDiscountName()
                 );
@@ -176,4 +186,33 @@ public class CheckoutCalculator {
         return new ItemCheckoutPrice(minPrice, freebies.get());
     }
 
+    private static int calculateBestGroupPrice(
+            Map<ItemType, ItemPrice> catalogue, Map<ItemType, Group> groupMap) {
+        Set<Integer> prices = new HashSet<>();
+        AtomicReference<Freebies> freebies = new AtomicReference<>();
+//        ItemType itemType = item.getKey();
+//        ItemPrice itemPrice = catalogue.get(itemType);
+//        int numberOfItems = item.getValue() - numberOfFreebies;
+//        if (itemPrice.getSpecialOffers().isPresent()) {
+//            List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
+//            OfferType offerType = offers.stream().iterator().next().getOfferType();
+//
+//
+//            GroupDiscount groupDiscount = GROUP_DISCOUNT_MAP.get(
+//                    offers.stream().iterator().next().getGroupDiscountName()
+//            );
+//            int discountQuantity = groupDiscount.getGroupQuantity();
+//            int discountPrice = groupDiscount.getUnitPrice();
+//        }
+//// STXS
+//        int totalCost = (numberOfItems * itemPrice.getUnitPrice());
+//        prices.add(totalCost);
+//
+//        Integer minPrice = Collections.min(prices);
+
+//        return new ItemCheckoutPrice(minPrice, freebies.get());
+        return 0;
+    }
+
 }
+
