@@ -205,6 +205,11 @@ public class CheckoutCalculator {
                     .reduce(Integer::sum).orElseThrow();
             int quantityUnit = numberOfItems / group.getQuantity();
             int remainingQuantity = numberOfItems - (quantityUnit * group.getQuantity());
+            int groupTotalCost = (quantityUnit * group.getUnitPrice());
+//            prices.add(groupTotalCost);
+            for (Map.Entry<ItemType, Integer> unitMap : itemToUnitPriceMap.entrySet()) {
+                
+            }
             System.out.println(remainingQuantity);
 
 //            group.getValue().getMembers().entrySet();
@@ -240,4 +245,5 @@ public class CheckoutCalculator {
     }
 
 }
+
 
