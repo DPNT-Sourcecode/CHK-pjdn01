@@ -192,24 +192,33 @@ public class CheckoutCalculator {
 
 
         for (Map.Entry<ItemType, Group> entry : groupMap.entrySet()) {
-            Map<ItemType, Integer> itemToUnitPriceMap = new HashMap<>();
+//            Map<ItemType, Integer> itemToUnitPriceMap = new HashMap<>();
             Map<ItemType, Integer> itemToQuantityMap = new HashMap<>();
+            List<Integer> fullUnitPriceList = new ArrayList<>();
             Group group = entry.getValue();
             for (Map.Entry<ItemType, GroupMember> members : group.getMembers().entrySet()) {
                 ItemType itemType = members.getKey();
                 GroupMember member = members.getValue();
-                itemToUnitPriceMap.put(itemType, member.getItemPrice().getUnitPrice());
+//                itemToUnitPriceMap.put(itemType, member.getItemPrice().getUnitPrice());
                 itemToQuantityMap.put(itemType, member.getQuantity());
+                Integer unitPrice = member.getItemPrice().getUnitPrice();
+                int itemQuantity = member.getQuantity();
+
+                for (int i = 0; i < itemQuantity; i++) {
+                    fullUnitPriceList.add(unitPrice);
+                }
             }
+
             int numberOfItems = itemToQuantityMap.values().stream()
                     .reduce(Integer::sum).orElseThrow();
             int quantityUnit = numberOfItems / group.getQuantity();
             int remainingQuantity = numberOfItems - (quantityUnit * group.getQuantity());
-            int groupTotalCost = (quantityUnit * group.getUnitPrice());
-            List<Integer> fullUnitPriceList = new ArrayList<>();
-            for (Map.Entry<ItemType, Integer> unitMap : itemToUnitPriceMap.entrySet()) {
-                for ()
-            }
+
+
+//            for (Map.Entry<ItemType, Integer> unitMap : itemToUnitPriceMap.entrySet()) {
+//                group.
+////                for (int i = 0; i < )
+//            }
             System.out.println(remainingQuantity);
 
 //            group.getValue().getMembers().entrySet();
@@ -245,6 +254,3 @@ public class CheckoutCalculator {
     }
 
 }
-
-
-
