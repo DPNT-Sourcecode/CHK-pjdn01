@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.Map;
 
 public class Catalogue implements Serializable {
-    Map<ItemType, ItemPrice>  catalogue;
+    Map<Object, Object>  catalogue;
 
-    public Map<ItemType, ItemPrice> getCatalogue() {
+    public Map<Object, Object> getCatalogue() {
         return catalogue;
     }
 }
+

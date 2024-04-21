@@ -1,9 +1,12 @@
 package befaster.solutions.CHK;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,8 +31,8 @@ public class CheckoutSolution {
 //        Map<Object, Object> myObj =gson.fromJson()
 
             ObjectMapper mapper = new ObjectMapper();
-            Catalogue myObj = mapper.readValue(new FileReader(filename), Catalogue.class);
-//            ItemPrice itemPrice = myObj.get(ItemType.A);
+            Map<Object, Object> myObj = mapper.readValue(new FileReader(filename), Map.class);
+
             Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
             Integer totalCost = calculateTotalCost(itemToCountMap);
@@ -49,3 +52,4 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
