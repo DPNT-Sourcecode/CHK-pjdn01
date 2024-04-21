@@ -4,8 +4,20 @@ public enum ItemType {
     A("A"),
     B("B"),
     C("C"),
-    D("D");
+    D("D"),
+    UNKNOWN("UNKNOWN");
+
+    private final String type;
+
+    ItemType(String type) {
+        this.type = type;
+    }
+
+    public String toString() {
+        return this.type;
+    }
 }
+
 
 
 
