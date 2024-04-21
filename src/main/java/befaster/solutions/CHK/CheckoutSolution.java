@@ -5,6 +5,7 @@ import befaster.runner.SolutionNotImplementedException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
 
@@ -33,9 +34,15 @@ public class CheckoutSolution {
             if (itemPrice == null) {
                 return -1d;
             }
-            
+            final Double unitPrice = itemPrice.getUnitPrice();
+            final Optional<Double> specialOfferPrice = itemPrice.getSpecialOfferPrice();
+            final Optional<Double> specialOfferQuantity = itemPrice.getSpecialOfferQuantity();
+            if (specialOfferPrice.isPresent()) {
+                Integer specialQuantityUnit = Math.floorMod((item.getValue()), specialOfferQuantity.get());
+            }
         }
     }
 
 }
+
 
