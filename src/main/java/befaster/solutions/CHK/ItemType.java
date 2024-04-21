@@ -8,6 +8,7 @@ public enum ItemType {
     B("B"),
     C("C"),
     D("D"),
+    E("E"),
     UNKNOWN("UNKNOWN");
 
     private static final Map<String, ItemType> enums = new HashMap<>(5);
