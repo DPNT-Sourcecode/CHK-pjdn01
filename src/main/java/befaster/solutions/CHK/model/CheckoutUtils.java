@@ -60,4 +60,3 @@ public class CheckoutUtils {
         return groupMap;
     }
 }
-
