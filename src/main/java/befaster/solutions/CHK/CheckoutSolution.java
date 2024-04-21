@@ -3,6 +3,8 @@ package befaster.solutions.CHK;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,24 +13,32 @@ import static befaster.solutions.CHK.CheckoutCalculator.calculateTotalCost;
 
 public class CheckoutSolution {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Integer check = checkout("FF");
         System.out.println(check);
     }
+
     public static Integer checkout(String skus) {
         if (skus == null || skus.isEmpty()) {
             return 0;
         }
-//        Gson gson = new Gson();
+
+        try {
+            //        Gson gson = new Gson();
 //        Map<Object, Object> myObj =gson.fromJson()
 
-        ObjectMapper mapper = new ObjectMapper();
-        InputStream is = Test.class.getResourceAsStream("/test.json");
+            ObjectMapper mapper = new ObjectMapper();
+            Map<Object, Object> myObj = mapper.readValue(new File("itemCatalogue.json"), Map.class);
 
-        Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
+            Map<ItemType, Integer> itemToCountMap = getItemToCountMap(skus);
 
-        Integer totalCost = calculateTotalCost(itemToCountMap);
-        return totalCost;
+            Integer totalCost = calculateTotalCost(itemToCountMap);
+            return totalCost;
+
+        } catch (Exception e) {
+            return -1;
+        }
+
     }
 
     private static Map<ItemType, Integer> getItemToCountMap(String skus) {
@@ -39,6 +49,7 @@ public class CheckoutSolution {
         return itemToCountMap;
     }
 }
+
 
 
 
