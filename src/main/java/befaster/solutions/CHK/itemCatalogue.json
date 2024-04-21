@@ -76,6 +76,12 @@
           "itemType": "H",
           "unitPrice": 45,
           "offerType": "Discount"
+        },
+        {
+          "quantity": 10,
+          "itemType": "H",
+          "unitPrice": 80,
+          "offerType": "Discount"
         }
       ]
     }
@@ -239,3 +245,4 @@
     "unitPrice": 50
   }
 }
+
