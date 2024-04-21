@@ -13,7 +13,7 @@ public enum ItemType {
     private static  final Map<String, ItemType> enums = new HashMap<>(5);
     static {
         for(ItemType itemType: ItemType.values()){
-            enums.put(itemType.toString())
+            enums.put(itemType.type, itemType);
         }
     }
     private final String type;
@@ -30,3 +30,4 @@ public enum ItemType {
         return this.type;
     }
 }
+
