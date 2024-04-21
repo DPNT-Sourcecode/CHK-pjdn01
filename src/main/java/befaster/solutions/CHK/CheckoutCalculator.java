@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap;
-import static befaster.solutions.CHK.CheckoutUtils.ItemToPriceMap2;
 
 public class CheckoutCalculator {
     public static Integer calculateTotalCost(Map<ItemType, Integer> itemToCountMap) {
@@ -22,7 +21,7 @@ public class CheckoutCalculator {
 
         Optional<Optional<SpecialOffers>> hasSpecialOffers = itemToCountMap.keySet().stream()
                 .filter(type -> type != ItemType.UNKNOWN)
-                .map(ItemToPriceMap2::get)
+                .map(ItemToPriceMap::get)
                 .map(ItemPrice::getSpecialOffers)
                 .filter(Objects::nonNull)
                 .map(Optional::of)
@@ -103,17 +102,19 @@ public class CheckoutCalculator {
         Set<Integer> prices = new HashSet<>();
         AtomicReference<Freebies> freebies = new AtomicReference<>();
         ItemType itemType = item.getKey();
-        ItemPrice itemPrice = ItemToPriceMap2.get(itemType);
+        ItemPrice itemPrice = ItemToPriceMap.get(itemType);
         int numberOfItems = item.getValue() - numberOfFreebies;
         if (itemPrice.getSpecialOffers().isPresent()) {
             List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
-            long offerItemTypes = offers.stream().map(Offer::getItemType).distinct().count();
+            OfferType offerType = offers.stream().iterator().next().getOfferType();
 
-            if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
+            if (offerType == OfferType.DISCOUNT) {
+
                 List<Integer> offerQuantities = offers.stream().map(Offer::getQuantity).toList();
                 int maxOfferQuantity = Collections.max(offerQuantities);
                 int totalOfferQuantity = offerQuantities.stream().reduce(Integer::sum).orElseThrow();
-                if (maxOfferQuantity > 0 && numberOfItems % maxOfferQuantity  == 0) {
+
+                if (maxOfferQuantity > 0 && numberOfItems % maxOfferQuantity == 0) {
                     int offerQuantityUnit = numberOfItems / maxOfferQuantity;
                     Offer offer = offers.stream().filter(o -> o.getQuantity() == maxOfferQuantity).findFirst().orElseThrow();
                     prices.add(offerQuantityUnit * offer.getUnitPrice());
@@ -132,8 +133,7 @@ public class CheckoutCalculator {
                         prices.add(totalCost);
                     });
                 }
-
-            } else if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() != itemType) {
+            } else if (offerType == OfferType.FREEBIES) {
                 offers.forEach(offer -> {
                     int offerQuantityUnit = numberOfItems / offer.getQuantity();
                     if (offer.getUnitPrice() == 0) {
@@ -159,5 +159,6 @@ public class CheckoutCalculator {
     }
 
 }
+
 
 
