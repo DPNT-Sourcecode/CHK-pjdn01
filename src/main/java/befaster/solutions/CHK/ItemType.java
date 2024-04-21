@@ -4,7 +4,8 @@ public enum ItemType {
     A("A"),
     B("B"),
     C("C"),
-    D("D")
+    D("D");
 }
+
 
 
