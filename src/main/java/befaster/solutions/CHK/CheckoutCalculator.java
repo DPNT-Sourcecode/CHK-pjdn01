@@ -117,7 +117,7 @@ public class CheckoutCalculator {
             } else if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() != itemType) {
                 offers.forEach(offer -> {
                     int offerPrice = offer.getUnitPrice();
-                    int offerQuantityUnit = item.getValue() / numberOfItems;
+                    int offerQuantityUnit = numberOfItems / offer.getQuantity();
                     if (offerPrice == 0) {
                         int totalCost = (item.getValue() * itemPrice.getUnitPrice());
                         prices.add(totalCost);
@@ -176,3 +176,4 @@ public class CheckoutCalculator {
 //    }
 
 }
+
