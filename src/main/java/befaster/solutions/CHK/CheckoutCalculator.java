@@ -153,30 +153,30 @@ public class CheckoutCalculator {
         return new ItemCheckoutPrice(minPrice, freebies.get());
     }
 
-    private static void calculateOfferPrice(Map.Entry<ItemType, Integer> item, int numberOfFreebies) {
-        Set<Integer> prices = new HashSet<>();
-        AtomicReference<Freebies> freebies = new AtomicReference<>();
-        ItemType itemType = item.getKey();
-        ItemPrice itemPrice = ItemToPriceMap2.get(itemType);
-        int numberOfItems = item.getValue() - numberOfFreebies;
-        if (itemPrice.getSpecialOffers().isPresent()) {
-            List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
-            long offerItemTypes = offers.stream().map(Offer::getItemType).distinct().count();
-            if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
-                for (int i = 0; i < offers.size(); i++) {
-                    Offer offer = offers.get(i);
-                    if (numberOfItems >= offer.getQuantity()) {
-                        int offerQuantityUnit = numberOfItems / offer.getQuantity();
-                        int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
-                        int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingNumberOfItems * itemPrice.getUnitPrice());
-                        prices.add(totalCost);
-                    }
-
-                }
-                ;
-            }
-        }
-    }
+//    private static void calculateOfferPrice(Map.Entry<ItemType, Integer> item, int numberOfFreebies) {
+//        Set<Integer> prices = new HashSet<>();
+//        AtomicReference<Freebies> freebies = new AtomicReference<>();
+//        ItemType itemType = item.getKey();
+//        ItemPrice itemPrice = ItemToPriceMap2.get(itemType);
+//        int numberOfItems = item.getValue() - numberOfFreebies;
+//        if (itemPrice.getSpecialOffers().isPresent()) {
+//            List<Offer> offers = itemPrice.getSpecialOffers().get().getOffers();
+//            long offerItemTypes = offers.stream().map(Offer::getItemType).distinct().count();
+//            if (offerItemTypes == 1 && offers.stream().iterator().next().getItemType() == itemType) {
+//                for (int i = 0; i < offers.size(); i++) {
+//                    Offer offer = offers.get(i);
+//                    if (numberOfItems >= offer.getQuantity()) {
+//                        int offerQuantityUnit = numberOfItems / offer.getQuantity();
+//                        int remainingNumberOfItems = numberOfItems - (offerQuantityUnit * offer.getQuantity());
+//                        int totalCost = (offerQuantityUnit * offer.getUnitPrice()) + (remainingNumberOfItems * itemPrice.getUnitPrice());
+//                        prices.add(totalCost);
+//                    }
+//
+//                }
+//                ;
+//            }
+//        }
+//    }
 
 //    private static void updateCheckoutPrice(Map<ItemType, List<Integer>> itemCheckoutPrice, ItemType itemType, int totalCost) {
 //        List<Integer> checkoutPrices = itemCheckoutPrice.get(itemType);
@@ -189,6 +189,7 @@ public class CheckoutCalculator {
 //    }
 
 }
+
 
 
 
